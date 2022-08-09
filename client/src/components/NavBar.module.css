@@ -1,0 +1,50 @@
+:root {
+  --violet: #832c99;
+  --seaGreen: #38bd67;
+  --champagne: #f6e2cb;
+  --crimson: #e9184e;
+  --purple: #3f1e59;
+}
+
+.navbar {
+  height: 5em;
+  background-color: var(--seaGreen);
+  opacity: 0.9;
+}
+
+.navbar nav {
+  height: 100%;
+}
+
+.navbar ul {
+  height: 100%;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  margin: 6rem;
+  width: 8rem;
+  align-items: center;
+}
+
+.navbar a {
+  color: var(--darkBlue);
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: var(--lightBlue);
+  padding-bottom: 0.3rem;
+  border-bottom: 2px dashed var(--lightBlue);
+}
+
+.navbar a.active {
+  color: white;
+  padding-bottom: 0.3rem;
+  border-bottom: 4px solid white;
+}

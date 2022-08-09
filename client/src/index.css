@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
+
+:root {
+  --violet: #832c99;
+  --seaGreen: #38bd67;
+  --champagne: #f6e2cb;
+  --cobalt: #0047ab;
+  --purple: #3f1e59;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Oxygen", sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: black;
+  /* background-image: url("./image/Background.jpg"); */
+  background-size: cover;
+  background-blend-mode: lighten;
+  color: white;
+  text-shadow: 2px 1px #000000;
+}
+
+.centered {
+  margin: 2rem auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.siteHeader {
+  text-align: center;
+  background-color: rgb(0, 24, 70);
+  opacity: 0.8;
+  color: white;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  height: 100%;
+}
+
+.siteHeader h1 {
+  margin: 0;
+  padding: 20px;
+}
+
+.upperCase {
+  text-transform: uppercase;
+}
+
+.hideComponent {
+  /* visibility: hidden; */
+  display: none;
+  /* opacity: 0; */
+}
+
+.listCenter {
+  margin: 2rem auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0.8;
+  color: white;
+}
+
+.listSpanStyle {
+  margin-left: 20px;
+  background-color: rgb(48, 121, 123);
+  border: 2px solid black;
+}
+
+.listBottomMargin {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+form input {
+  width: 100%;
+}
