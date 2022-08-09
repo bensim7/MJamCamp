@@ -33,18 +33,18 @@
 }
 
 .navbar a {
-  color: var(--darkBlue);
+  color: white;
   text-decoration: none;
 }
 
 .navbar a:hover {
-  color: var(--lightBlue);
+  color: var(--champagne);
   padding-bottom: 0.3rem;
   border-bottom: 2px dashed var(--lightBlue);
 }
 
 .navbar a.active {
-  color: white;
+  color: var(--purple);
   padding-bottom: 0.3rem;
-  border-bottom: 4px solid white;
+  border-bottom: 4px solid var(--purple);
 }

@@ -17,10 +17,10 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink
-              to="/Writesong"
+              to="/Addsong"
               className={(navData) => (navData.isActive ? styles.active : "")}
             >
-              Write Song
+              Enter Song
             </NavLink>
           </li>
           <li>

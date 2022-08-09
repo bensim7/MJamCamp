@@ -1,34 +1,131 @@
-import "./App.css";
-import NavBar from "./components/NavBar";
+import React, { useState, useContext, useEffect } from "react";
 import { Route, Navigate, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import "./App.css";
+import ReactContext from "./context/react.context";
+import LoginForm from "./components/LoginForm";
+import ViewUser from "./components/ViewUser";
+import Song from "./components/Song";
+import ViewSong from "./components/ViewSong";
 
 function App() {
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [validFields, setValidFields] = useState(false);
+  const [loginInvalid, setLoginInvalid] = useState({});
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [loginData, setLoginData] = useState("");
+
+  let data = "";
+  const fetchLogin = async () => {
+    setIsLoading(true);
+    setError(null);
+    const body = { email: emailInput, password: passwordInput };
+    const url = "http://localhost:5001/users/login";
+
+    const config = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+
+    try {
+      const res = await fetch(url, config);
+      if (res.status !== 200) {
+        throw new Error(
+          "Something went wrong. Please check if all inputs are valid or if you are authorized"
+        );
+      }
+
+      data = await res.json();
+      setLoginData(data.access);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  };
+  console.log(loginData);
+  ///////////////////////
+  // Submit Function
+  ///////////////////////
+
+  useEffect(() => {
+    setValidFields(emailInput !== "" && passwordInput !== "");
+  }, [emailInput, passwordInput]);
+
+  const handleLoginSubmit = (event) => {
+    event.preventDefault();
+
+    const emailCheck =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (validFields) {
+      if (emailInput.match(emailCheck) && passwordInput.length >= 12) {
+        fetchLogin();
+      } else if (!emailInput.match(emailCheck)) {
+        setLoginInvalid({ email: "Please enter a valid email" });
+      } else if (passwordInput.length < 12) {
+        setLoginInvalid({ password: "Password is not valid" });
+      }
+    }
+  };
+
+  const handleEmailInput = (event) => {
+    setEmailInput(event.target.value);
+  };
+
+  const handlePasswordInput = (event) => {
+    setPasswordInput(event.target.value);
+  };
+
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       <header>
-        <h1>hello</h1>
+        <h1 className="pt-3 pb-3">MJC</h1>
       </header>
       <NavBar />
       <main>
         <Routes>
           <Route path="/" element={<Navigate replace to="/Login" />} />
-          {/* <Route path="/Login" element={<Login />} />
-          <Route path="/Writesong" element={<Writesong />} />
-          <Route path="Searchsong" element={<Searchsong />} /> */}
+          <Route
+            path="/Login"
+            element={
+              <ReactContext.Provider
+                value={{
+                  emailInput,
+                  passwordInput,
+                  handleLoginSubmit,
+                  handleEmailInput,
+                  handlePasswordInput,
+                  loginData,
+                  error,
+                  isLoading,
+                  validFields,
+                  loginInvalid,
+                }}
+              >
+                <LoginForm /> {loginData ? <ViewUser /> : ""}
+              </ReactContext.Provider>
+            }
+          />
+          <Route
+            path="/Addsong"
+            element={
+              <ReactContext.Provider value={{ loginData }}>
+                <Song />
+              </ReactContext.Provider>
+            }
+          />
+          <Route
+            path="/Searchsong"
+            element={
+              <ReactContext.Provider value={{ loginData }}>
+                <ViewSong />
+              </ReactContext.Provider>
+            }
+          />
         </Routes>
       </main>
     </div>

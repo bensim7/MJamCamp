@@ -32,12 +32,12 @@ html {
 
 body {
   margin: 0;
-  background-color: black;
+  background-color: var(--cobalt);
   /* background-image: url("./image/Background.jpg"); */
   background-size: cover;
   background-blend-mode: lighten;
   color: white;
-  text-shadow: 2px 1px #000000;
+  text-shadow: 1px 1px #000000;
 }
 
 .centered {
@@ -98,3 +98,7 @@ body {
 form input {
   width: 100%;
 }
+
+/* header {
+  background-color: var(--purple);
+} */

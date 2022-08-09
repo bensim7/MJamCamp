@@ -16,7 +16,7 @@ router.get("/testing", auth, async (req, res) => {
 });
 
 // Create a song
-router.post("/createsong", auth, async (req, res) => {
+router.post("/addsong", auth, async (req, res) => {
   try {
     const { title, lyrics, chords, genretag } = req.body;
     const userEmail = req.decoded.email;
