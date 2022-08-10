@@ -5,7 +5,7 @@ import "./App.css";
 import ReactContext from "./context/react.context";
 import LoginForm from "./components/LoginForm";
 import ViewUser from "./components/ViewUser";
-import Song from "./components/Song";
+import AddSongMain from "./components/AddSongMain";
 import ViewSong from "./components/ViewSong";
 
 function App() {
@@ -114,7 +114,7 @@ function App() {
             path="/Addsong"
             element={
               <ReactContext.Provider value={{ loginData }}>
-                <Song />
+                <AddSongMain />
               </ReactContext.Provider>
             }
           />

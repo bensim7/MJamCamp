@@ -17,6 +17,9 @@ router.get("/testing", auth, async (req, res) => {
 
 // Create a song
 router.post("/addsong", auth, async (req, res) => {
+  console.log(`accessing /POST addsong`);
+  console.log(req.decoded);
+  console.log(req.body);
   try {
     const { title, lyrics, chords, genretag } = req.body;
     const userEmail = req.decoded.email;
@@ -63,16 +66,24 @@ router.get("/allsongs", auth, async (req, res) => {
 });
 
 // View one song
-router.get("/getsong", auth, async (req, res) => {
+router.post("/getsong", auth, async (req, res) => {
+  console.log("view one song");
+  console.log(req.body);
   try {
     const userEmail = req.decoded.email;
     const { title } = req.body;
-    const getSong = await pool.query(
-      //   `SELECT * FROM songs WHERE email='${userEmail}' AND title LIKE '%${title}%'`
-      `SELECT * FROM songs WHERE email=$1 AND title LIKE '%${title}%'`,
-      [userEmail]
-    );
-    res.json(getSong.rows);
+    if (title !== "") {
+      const getSong = await pool.query(
+        //   `SELECT * FROM songs WHERE email='${userEmail}' AND title LIKE '%${title}%'`
+        `SELECT * FROM songs WHERE email=$1 AND title LIKE '%${title}%'`,
+        [userEmail]
+      );
+      res.json(getSong.rows);
+    } else {
+      res
+        .status(400)
+        .json({ status: "error", message: "Please key in an input." });
+    }
   } catch (error) {
     console.log("GET /getsong ", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
@@ -85,7 +96,7 @@ router.put("/updatesong", auth, async (req, res) => {
     const userEmail = req.decoded.email;
     const { title, lyrics, chords, genretag } = req.body;
     const updateSong = await pool.query(
-      "UPDATE songs SET lyrics = $1, chords = $2, genretag = $3 WHERE email = $4 AND title = $5",
+      "UPDATE songs SET lyrics = $1, chords = $2, genretag = $3, updated_on = current_timestamp WHERE email = $4 AND title = $5",
       [lyrics, chords, genretag, userEmail, title]
     );
     res.json(updateSong);
@@ -97,7 +108,7 @@ router.put("/updatesong", auth, async (req, res) => {
 
 // Delete song
 
-router.put("/deletesong", auth, async (req, res) => {
+router.delete("/deletesong", auth, async (req, res) => {
   try {
     const userEmail = req.decoded.email;
     const { title } = req.body;

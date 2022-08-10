@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
     };
 
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: "20m",
+      expiresIn: "30m",
       jwtid: uuidv4(),
     });
 

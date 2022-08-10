@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
 
-const AddSong = () => {
+const AddSongForm = () => {
   const reactCtx = useContext(ReactContext);
 
   //   console.log(reactCtx.accessToken);
@@ -10,8 +10,8 @@ const AddSong = () => {
   console.log(reactCtx.viewAddedSong);
 
   if (reactCtx.accessToken) {
-    if (reactCtx.viewAddedSong) {
-      content = <div>{reactCtx.viewAddedSong}</div>;
+    if (reactCtx.addedSong) {
+      content = <div>{reactCtx.AddedSong}</div>;
     }
 
     if (reactCtx.error) {
@@ -22,7 +22,7 @@ const AddSong = () => {
       content = <p>Loading .. please wait</p>;
     }
   } else {
-    content = <p>Not Authorized</p>;
+    content = <p>Add Song: Not Authorized</p>;
   }
   return (
     <>
@@ -86,10 +86,10 @@ const AddSong = () => {
               </div>
             </div>
 
-            {/* <div className="row mt-3">
+            <div className="row mt-3">
               <div className="col-md-4">
                 <label>
-                  <h5>Select Genre 01</h5>
+                  <h5>Select Genre</h5>
                 </label>
               </div>
               <div className="col-md-5">
@@ -111,14 +111,14 @@ const AddSong = () => {
                   <option value="Hip Hop">Hip Hop</option>
                 </select>
               </div>
-            </div> */}
+            </div>
             <div className="row mt-3">
               {/* <div className="col-md-4">
                 <label>
                   <h5>Select Genre 02</h5>
                 </label>
-              </div> */}
-              {/* <div className="col-md-5">
+              </div>
+              <div className="col-md-5">
                 <select name="genre2" onChange={reactCtx.handleGenreTagInput}>
                   <option value="">None Selected</option>
                   <option value="Classic Rock">Classic Rock</option>
@@ -144,4 +144,4 @@ const AddSong = () => {
   );
 };
 
-export default AddSong;
+export default AddSongForm;

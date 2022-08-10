@@ -102,3 +102,15 @@ form input {
 /* header {
   background-color: var(--purple);
 } */
+
+.deleteSong {
+  width: 30%;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.searchSong {
+  width: 45%;
+  margin: auto;
+  margin-top: 2em;
+}

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
-import AddSong from "./AddSong";
+import AddSongForm from "./AddSongForm";
 
-const Song = () => {
+const AddSongMain = () => {
   const reactCtx = useContext(ReactContext);
   const [titleInput, setTitleInput] = useState("");
   const [lyricsInput, setLyricsInput] = useState("");
@@ -10,9 +10,13 @@ const Song = () => {
   const [genreTagInput, setGenreTagInput] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [viewAddedSong, setViewAddedSong] = useState("");
-
+  const [addedSong, setAddedSong] = useState("");
+  // const [viewSong, setViewSong] = useState([]);
   const accessToken = reactCtx.loginData;
+
+  /////////////////////////////////
+  // Add Song
+  ////////////////////////////////
 
   const addSong = async () => {
     setIsLoading(true);
@@ -22,34 +26,39 @@ const Song = () => {
       title: titleInput,
       lyrics: lyricsInput,
       chords: chordsInput,
-      // genretag: genreTagInput,
+      genretag: genreTagInput,
     };
+    console.log(body);
 
     const url = "http://localhost:5001/songs/addsong";
 
     const config = {
       method: "POST",
-      headers: { authorization: "Bearer " + accessToken },
-      "Content-Type": "application/json",
+      headers: {
+        authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(body),
     };
 
     try {
       const res = await fetch(url, config);
+      console.log(res);
       if (res.status !== 200) {
         throw new Error("Unable to add song");
       }
       const data = await res.json();
-      setViewAddedSong(data);
+      setAddedSong(data);
     } catch (error) {
       setError(error.message);
     }
+    setIsLoading(false);
   };
 
-  console.log(viewAddedSong);
+  console.log(addedSong);
 
   ///////////////////////////////
-  // Submit Function
+  // Add Song Submit Function
   ///////////////////////////////
 
   const handleAddSongSubmit = (event) => {
@@ -88,11 +97,11 @@ const Song = () => {
           handleGenreTagInput,
           isLoading,
           error,
-          viewAddedSong,
+          addedSong,
           accessToken,
         }}
       >
-        <AddSong />
+        <AddSongForm />
       </ReactContext.Provider>
       {/* <form onSubmit={handleAddSongSubmit}>
         <label>
@@ -131,4 +140,4 @@ const Song = () => {
   );
 };
 
-export default Song;
+export default AddSongMain;
