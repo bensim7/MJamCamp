@@ -49,6 +49,7 @@ const AddSongMain = () => {
       }
       const data = await res.json();
       setAddedSong(data);
+      alert("Song Successfully Added!");
     } catch (error) {
       setError(error.message);
     }

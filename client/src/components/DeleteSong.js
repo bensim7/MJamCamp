@@ -96,7 +96,10 @@ const DeleteSong = () => {
       <div className="container">
         <form onSubmit={handleDeleteSubmit}>
           <div className="row">
-            <div className="col-sm-9">
+            <div className="col-md-3">
+              <label>Delete Song: </label>
+            </div>
+            <div className="col-md-7">
               <input
                 name="title"
                 value={deleteTitleInput}
@@ -104,8 +107,8 @@ const DeleteSong = () => {
                 placeholder="Choose Song to Delete"
               />
             </div>
-            <div className="col-sm-1">
-              <button type="submit" className="btn btn-danger">
+            <div className="col-md-1">
+              <button type="submit" className="btn btn-outline-light">
                 Delete
               </button>
             </div>

@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import ReactContext from "../context/react.context";
 import DeleteSong from "./DeleteSong";
 import SearchSongForm from "./SearchSongForm";
-import UpdateSong from "./UpdateSong";
+// import UpdateSong from "./UpdateSong";
+import UpdateSongModal from "./UpdateSongModal";
+import Button from "react-bootstrap/Button";
 
 const ViewSong = () => {
   const reactCtx = useContext(ReactContext);
@@ -11,7 +13,7 @@ const ViewSong = () => {
   const [viewSong, setViewSong] = useState([]);
   const [showSongList, setShowSongList] = useState(false);
   const [deleteTitleInput, setDeleteTitleInput] = useState("");
-
+  const [modalShow, setModalShow] = useState(false);
   const accessToken = reactCtx.loginData;
 
   //   let content = "";
@@ -127,7 +129,7 @@ const ViewSong = () => {
               <div className="col-sm-9">{item.created_on}</div>
             </div>
             <div className="row">
-              <div className="col-sm-3">email: </div>
+              <div className="col-sm-3">Email: </div>
               <div className="col-sm-9">{item.email}</div>
             </div>
             <br />
@@ -169,9 +171,15 @@ const ViewSong = () => {
       </div>
 
       <SearchSongForm />
-      <UpdateSong />
+      <br />
+      {/* <Button variant="primary" onClick={() => setModalShow(true)}>
+        Edit Song
+      </Button>
+
+      <UpdateSongModal show={modalShow} onHide={() => setModalShow(false)} /> */}
+
       <div className="mt-5">
-        <button onClick={handleAllSongs} className="btn btn-warning">
+        <button onClick={handleAllSongs} className="btn btn-outline-warning">
           View All Songs
         </button>
         <div className="mt-5">
