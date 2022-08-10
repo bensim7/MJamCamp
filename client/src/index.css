@@ -109,9 +109,9 @@ form input {
   width: 100%;
 }
 
-/* header {
+header {
   background-color: var(--purple);
-} */
+}
 
 .deleteSong {
   width: 45%;

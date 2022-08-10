@@ -83,8 +83,9 @@ function App() {
     <div className="App">
       <header>
         <h1 className="pt-3 pb-3">MJC</h1>
+        <NavBar />
       </header>
-      <NavBar />
+
       <main>
         <Routes>
           <Route path="/" element={<Navigate replace to="/Login" />} />
