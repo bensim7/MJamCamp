@@ -11,6 +11,7 @@ const ViewSong = () => {
   const [viewSong, setViewSong] = useState([]);
   const [showSongList, setShowSongList] = useState(false);
   const [deleteTitleInput, setDeleteTitleInput] = useState("");
+
   const accessToken = reactCtx.loginData;
 
   //   let content = "";
@@ -144,6 +145,10 @@ const ViewSong = () => {
   if (isLoading) {
     content = <p>Loading .. please wait</p>;
   }
+
+  // if (!viewSong[0]) {
+  //   content = <p>No songs yet, please add some songs!</p>;
+  // }
   return (
     <>
       {/* <div className="container">

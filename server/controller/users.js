@@ -94,7 +94,7 @@ router.post("/createuser", async (req, res) => {
 
     const hash = await bcrypt.hash(password, 12);
     const newUser = await pool.query(
-      "INSERT INTO users (username, password, email, musictype, location, last_login) VALUES($1, $2, $3, $4, $5, current_timestamp) RETURNING *",
+      "INSERT INTO users (username, password, email, musictype, location) VALUES($1, $2, $3, $4, $5) RETURNING *",
       [username, hash, email, musictype, location]
     );
 

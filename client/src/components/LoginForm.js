@@ -1,8 +1,11 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
+import RegisterModal from "./RegisterModal";
+import Button from "react-bootstrap/Button";
 
 const LoginForm = () => {
   const reactCtx = useContext(ReactContext);
+  const [modalShow, setModalShow] = useState(false);
 
   let content = "";
   console.log(reactCtx.loginData);
@@ -42,7 +45,7 @@ const LoginForm = () => {
                 onChange={reactCtx.handleEmailInput}
                 type="text"
                 placeholder="Enter Email Here"
-              ></input>
+              />
             </div>
           </div>
           <p>{reactCtx.loginInvalid.email}</p>
@@ -71,17 +74,27 @@ const LoginForm = () => {
               {reactCtx.validFields ? (
                 <h6>All inputs are filled</h6>
               ) : (
-                <h6>Please enter your email and password to log in</h6>
+                <h6>Please fill both email and password:</h6>
               )}
             </div>
-            <div className="col-md-8">
-              <button className="btn btn-success" type="submit">
+            <div className="col-md-4">
+              <Button
+                variant="outline-warning"
+                onClick={() => setModalShow(true)}
+              >
+                Register New User
+              </Button>
+            </div>
+            <div className="col-md-1">
+              <button className="btn btn-outline-light" type="submit">
                 Submit
               </button>
             </div>
           </div>
         </form>
       </div>
+
+      <RegisterModal show={modalShow} onHide={() => setModalShow(false)} />
       <div className="mt-5">{content}</div>
     </>
   );

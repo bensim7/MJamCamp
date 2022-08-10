@@ -2,13 +2,14 @@
   --violet: #832c99;
   --seaGreen: #38bd67;
   --champagne: #f6e2cb;
+  --cobalt: #0047ab;
   --crimson: #e9184e;
   --purple: #3f1e59;
 }
 
 .navbar {
   height: 5em;
-  background-color: var(--seaGreen);
+  background-color: var(--purple);
   opacity: 0.9;
 }
 
@@ -38,13 +39,21 @@
 }
 
 .navbar a:hover {
-  color: var(--champagne);
+  color: var(--seaGreen);
   padding-bottom: 0.3rem;
-  border-bottom: 2px dashed var(--lightBlue);
+  border-bottom: 2px dashed white;
+  font-weight: 500;
+  font-size: larger;
 }
 
 .navbar a.active {
-  color: var(--purple);
+  color: var(--seaGreen);
   padding-bottom: 0.3rem;
   border-bottom: 4px solid var(--purple);
+  font-size: larger;
+  font-weight: 500;
 }
+
+/* .navbar li:hover {
+  background-color: var(--champagne);
+} */

@@ -18,7 +18,6 @@ function App() {
   const [error, setError] = useState(null);
   const [loginData, setLoginData] = useState("");
 
-  let data = "";
   const fetchLogin = async () => {
     setIsLoading(true);
     setError(null);
@@ -39,7 +38,7 @@ function App() {
         );
       }
 
-      data = await res.json();
+      const data = await res.json();
       setLoginData(data.access);
     } catch (error) {
       setError(error.message);

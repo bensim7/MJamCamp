@@ -5,7 +5,7 @@ import styles from "./NavBar.module.css";
 const NavBar = () => {
   return (
     <header className={styles.navbar}>
-      <nav>
+      <nav class>
         <ul>
           <li>
             <NavLink
@@ -15,6 +15,7 @@ const NavBar = () => {
               Log In
             </NavLink>
           </li>
+
           <li>
             <NavLink
               to="/Addsong"
