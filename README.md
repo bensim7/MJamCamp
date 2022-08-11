@@ -13,7 +13,7 @@ Users can also search for other users based on music interest such as Guitarist,
 
 ---
 
-## Technologies Use
+## Technologies Used
 
 PERN Stack is used
 Postgresql
@@ -22,7 +22,8 @@ React
 Node.js
 Local Storage
 
-Bootstrap was also used style eg. Bootstrap Modals, Buttons, Bootstrap Grids.
+Bootstrap  
+eg. Bootstrap Modals, Buttons, Bootstrap Grids
 
 ---
 
