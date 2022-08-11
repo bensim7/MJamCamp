@@ -58,9 +58,6 @@ router.post("/addsong", auth, async (req, res) => {
 
 // router.post("/seedsongs", auth, async (req, res) => {
 //   try {
-//     // const userEmail = req.decoded.email;
-//     // console.log(userEmail);
-
 //     const seedSongs = await pool.query(
 //       "INSERT INTO songs (title, lyrics, chords, genre, email) VALUES('Apple Fruit', 'awesome random lyrics test', 'Verse: Am C F G', 'Classic Rock', 'tester1@gmail.com'), ('Best Day To Cycle', 'best random lyrics test', 'Verse: Am C F G', 'Indie', 'tester1@gmail.com'), ('Climb and Clam', 'climb random lyrics test', 'Verse: Am C F G', 'Indie', 'tester2@gmail.com'), ('Dive and Damp', 'dive random lyrics test', 'Verse: Am C F G', 'Classic Rock', 'tester2@gmail.com'), ('Excellent Experiment', 'experiment random lyrics test', 'Verse: Am C F G', 'Alternative Rock', 'tester3@gmail.com'), ('Fast Flying', 'fast random lyrics test', 'Verse: Am C F G', 'Grunge', 'tester3@gmail.com'), ('Grandpa', 'grand random lyrics test', 'Verse: Am C F G', 'Grunge', 'tester5@gmail.com'), ('High Gravel', 'high random lyrics test', 'Verse: Am C F G', 'Pop', 'tester4@gmail.com'), ('Isometic', 'high random lyrics test', 'Verse: Am C F G', 'Pop', 'tester6@gmail.com')"
 //     );
