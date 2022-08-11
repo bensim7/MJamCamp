@@ -150,10 +150,7 @@ router.post(
 
 // router.post("/seedusers", auth, async (req, res) => {
 //   try {
-//     // const hash = await bcrypt.hash(password, 12);
 //     const seedUsers = await pool.query(
-//       // "INSERT INTO users (username, password, email, contact, musictype, location) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
-//       // [username, hash, email, contact, musictype, location]
 //       "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
 //     );
 
