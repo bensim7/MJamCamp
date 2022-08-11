@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactContext from "../context/react.context";
+import UpdateLoggedInUserModal from "./UpdateLoggedInUserModal";
+import Button from "react-bootstrap/Button";
 
 const ViewUser = () => {
   const reactCtx = useContext(ReactContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [viewData, setViewData] = useState({});
+  const [modalShow, setModalShow] = useState(false);
 
   //   const handleUserSubmit = (event) => {
   //     event.preventDefault();
@@ -25,7 +28,6 @@ const ViewUser = () => {
     const config = {
       method: "GET",
       headers: { authorization: "Bearer " + accessToken },
-      "Content-Type": "application/json",
     };
 
     try {
@@ -41,6 +43,9 @@ const ViewUser = () => {
     setIsLoading(false);
   };
 
+  ////////////////////////
+  // Auto fetch Logged In User's detail when accessToken is populated with useContent
+  /////////////////////////
   useEffect(() => {
     fetchViewUser();
   }, [accessToken]);
@@ -50,13 +55,39 @@ const ViewUser = () => {
 
   if (viewData) {
     content = (
-      <>
-        <div>User Name: {viewData.username}</div>
-        <div>Instrument: {viewData.musictype}</div>
-        <div>Location: {viewData.location}</div>
-        <div>Account created:{viewData.created_on}</div>
-        <div>Last Login:{viewData.last_login}</div>
-      </>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">User Name:</div>
+          <div className="col-sm-2">{viewData.username}</div>
+        </div>
+        <div className="row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">Instrument:</div>
+          <div className="col-sm-2">{viewData.musictype}</div>
+        </div>
+        <div className="row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">Optional Contact Info:</div>
+          <div className="col-sm-2"> {viewData.contact}</div>
+        </div>
+        <div className="row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">Optional Location:</div>
+          <div className="col-sm-2"> {viewData.location}</div>
+        </div>
+
+        <div className="row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">Account created:</div>
+          <div className="col-sm-2">{viewData.created_on}</div>
+        </div>
+        <div className="row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">Last Login:</div>
+          <div className="col-sm-2">{viewData.last_login}</div>
+        </div>
+      </div>
     );
   }
 
@@ -70,11 +101,30 @@ const ViewUser = () => {
 
   return (
     <>
-      <div className="mt-5">
+      <div className="mt-4 container">
         {/* <button onClick={handleUserSubmit}>View User</button> */}
-        <h4>User Account Details:</h4>
-        {content}
+
+        <h5>User Account Details:</h5>
+        <div className="row">
+          <div className="col-sm-3"></div>
+          <div className="col-sm-4"></div>
+          <div className="col-sm-2">
+            <Button
+              variant="outline-warning"
+              onClick={() => setModalShow(true)}
+            >
+              Update Details
+            </Button>
+          </div>
+        </div>
       </div>
+      {content}
+      <ReactContext.Provider value={{ accessToken, fetchViewUser }}>
+        <UpdateLoggedInUserModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      </ReactContext.Provider>
     </>
   );
 };

@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import ReactContext from "../context/react.context";
 
-function RegisterModal(props) {
+const UpdateLoggedInUserModal = (props) => {
+  const reactCtx = useContext(ReactContext);
+
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [password1Input, setPassword1Input] = useState("");
@@ -12,21 +15,21 @@ function RegisterModal(props) {
   const [contactInput, setContactInput] = useState("");
 
   const [validFields, setValidFields] = useState(false);
-  const [registerInvalid, setRegisterInvalid] = useState({});
+  const [updateUserInvalid, setUpdateUserInvalid] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [registerData, setRegisterData] = useState("");
+  const [updateUserData, setUpdateUserData] = useState("");
 
-  /////////////////////////////////
-  // Register User
-  ////////////////////////////////
-  const registerNewUser = async () => {
+  /////////////////////////////////////////
+  // Update User
+  /////////////////////////////////////////
+
+  const updateUserToDb = async () => {
     setIsLoading(true);
     setError(null);
 
     const body = {
-      email: emailInput,
       username: userNameInput,
       password: passwordInput,
       password1: password1Input,
@@ -35,11 +38,14 @@ function RegisterModal(props) {
       location: locationInput,
     };
 
-    const url = "http://localhost:5001/users/createuser";
+    const url = "http://localhost:5001/users/updateuser";
 
     const config = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: "PUT",
+      headers: {
+        authorization: "Bearer " + reactCtx.accessToken,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(body),
     };
 
@@ -50,16 +56,17 @@ function RegisterModal(props) {
           "Something went wrong. Please check if all inputs are filled correctly"
         );
       }
-
       const data = await res.json();
-      setRegisterData(data);
+      setUpdateUserData(data);
+      reactCtx.fetchViewUser(); // refresh Logged in user's detail after update
     } catch (error) {
       setError(error.message);
     }
+
     setIsLoading(false);
   };
 
-  console.log(registerData);
+  console.log(updateUserData);
 
   //////////////////////////////////////
   // Submit Button
@@ -67,54 +74,33 @@ function RegisterModal(props) {
 
   useEffect(() => {
     setValidFields(
-      emailInput !== "" &&
-        userNameInput !== "" &&
+      userNameInput !== "" &&
         passwordInput !== "" &&
         password1Input !== "" &&
         musicTypeInput !== ""
     );
-  }, [
-    emailInput,
-    userNameInput,
-    passwordInput,
-    password1Input,
-    musicTypeInput,
-  ]);
+  }, [userNameInput, passwordInput, password1Input, musicTypeInput]);
 
-  const handleRegistrationSubmit = (event) => {
+  const handleUpdateUserSubmit = (event) => {
     event.preventDefault();
 
-    const emailCheck =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
     if (validFields) {
-      if (
-        emailInput.match(emailCheck) &&
-        passwordInput.length >= 12 &&
-        passwordInput === password1Input
-      ) {
-        registerNewUser();
-        setEmailInput("");
+      if (passwordInput.length >= 12 && passwordInput === password1Input) {
+        updateUserToDb();
         setUserNameInput("");
         setPasswordInput("");
         setPassword1Input("");
         setMusicTypeInput("");
         setContactInput("");
         setLocationInput("");
-      } else if (!emailInput.match(emailCheck)) {
-        setRegisterInvalid({ email: "Please enter a valid email" });
       } else if (passwordInput.length < 12) {
-        setRegisterInvalid({ password: "Password is not valid" });
+        setUpdateUserInvalid({ password: "Password is not valid" });
       } else if (passwordInput !== password1Input) {
-        setRegisterInvalid({
+        setUpdateUserInvalid({
           passwordMatch: "The 2 password inputs do not match",
         });
       }
     }
-  };
-
-  const handleEmailInput = (event) => {
-    setEmailInput(event.target.value);
   };
 
   const handleUserNameInput = (event) => {
@@ -141,8 +127,8 @@ function RegisterModal(props) {
   };
 
   let content = "";
-  if (registerData[0]) {
-    content = <p>Registration Successful!</p>;
+  if (updateUserData) {
+    content = <p>Update Successful!</p>;
   }
   if (error) {
     content = { error };
@@ -151,9 +137,10 @@ function RegisterModal(props) {
   if (isLoading) {
     content = <p>Loading .. Please wait</p>;
   }
+
   return (
     <Modal
-      className="modalRegister"
+      className="modalUpdateUser"
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -162,36 +149,19 @@ function RegisterModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Registration Form
+          Update Your Details:
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {/* <h4>Registration Form</h4> */}
         <>
           {content}
           <div className="container">
-            <form onSubmit={handleRegistrationSubmit}>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label>*Email Address: </label>
-                </div>
-                <div className="col-sm-7">
-                  <input
-                    name="email"
-                    value={emailInput}
-                    onChange={handleEmailInput}
-                    type="text"
-                    placeholder="Enter Email Here"
-                  />
-                </div>
-              </div>
-              {registerInvalid.email}
-              <br />
+            <form onSubmit={handleUpdateUserSubmit}>
               <div className="row">
                 <div className="col-sm-3">
                   <label>*User Name: </label>
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-5">
                   <input
                     name="username"
                     value={userNameInput}
@@ -204,9 +174,9 @@ function RegisterModal(props) {
               <br />
               <div className="row">
                 <div className="col-sm-3">
-                  <label>*Password: </label>
+                  <label>*Update Password: </label>
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-5">
                   <input
                     name="password"
                     value={passwordInput}
@@ -216,14 +186,14 @@ function RegisterModal(props) {
                   />
                 </div>
               </div>
-              {registerInvalid.password}
+              {updateUserInvalid.password}
               <br />
 
               <div className="row">
                 <div className="col-sm-3">
                   <label>*Re-enter Password: </label>
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-5">
                   <input
                     name="password1"
                     value={password1Input}
@@ -233,14 +203,14 @@ function RegisterModal(props) {
                   />
                 </div>
               </div>
-              {registerInvalid.passwordMatch}
+              {updateUserInvalid.passwordMatch}
               <br />
 
               <div className="row">
                 <div className="col-sm-3">
                   <label>*Role: </label>
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-5">
                   <select
                     name="musictype"
                     value={musicTypeInput}
@@ -271,14 +241,12 @@ function RegisterModal(props) {
                   />
                 </div>
               </div>
-              <br />
               <div className="row">
                 <div className="col-sm-3">
                   <label>Optional Location: </label>
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-5">
                   <select name="location" onChange={handleLocationInput}>
-                    {/* value not required for drop down list*/}
                     <option value="">None Selected</option>
                     <option value="North">North</option>
                     <option value="South">South</option>
@@ -316,24 +284,6 @@ function RegisterModal(props) {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
-// function App() {
-//   const [modalShow, setModalShow] = React.useState(false);
-
-//   return (
-//     <>
-//       <Button variant="primary" onClick={() => setModalShow(true)}>
-//         Launch vertically centered modal
-//       </Button>
-
-//       <MyVerticallyCenteredModal
-//         show={modalShow}
-//         onHide={() => setModalShow(false)}
-//       />
-//     </>
-//   );
-// }
-
-// render(<App />);
-export default RegisterModal;
+export default UpdateLoggedInUserModal;

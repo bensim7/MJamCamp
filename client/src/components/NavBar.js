@@ -18,7 +18,7 @@ const NavBar = () => {
 
           <li>
             <NavLink
-              to="/Addsong"
+              to="/Createsong"
               className={(navData) => (navData.isActive ? styles.active : "")}
             >
               Enter Song
@@ -34,10 +34,10 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink
-              to="/Matches"
+              to="/Usermatch"
               className={(navData) => (navData.isActive ? styles.active : "")}
             >
-              Matches
+              User Match
             </NavLink>
           </li>
         </ul>

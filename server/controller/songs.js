@@ -21,7 +21,7 @@ router.post("/addsong", auth, async (req, res) => {
   console.log(req.decoded);
   console.log(req.body);
   try {
-    const { title, lyrics, chords, genretag } = req.body;
+    const { title, lyrics, chords, genre } = req.body;
     const userEmail = req.decoded.email;
     console.log(userEmail);
     // find if title exists
@@ -40,8 +40,8 @@ router.post("/addsong", auth, async (req, res) => {
 
     // if title does not exist, create song
     const newSong = await pool.query(
-      "INSERT INTO songs (title, lyrics, chords, genretag, email) VALUES($1, $2, $3, $4, $5)",
-      [title, lyrics, chords, genretag, userEmail]
+      "INSERT INTO songs (title, lyrics, chords, genre, email) VALUES($1, $2, $3, $4, $5)",
+      [title, lyrics, chords, genre, userEmail]
     );
 
     res.json(newSong);
@@ -94,10 +94,10 @@ router.post("/getsong", auth, async (req, res) => {
 router.put("/updatesong", auth, async (req, res) => {
   try {
     const userEmail = req.decoded.email;
-    const { title, lyrics, chords, genretag } = req.body;
+    const { title, lyrics, chords, genre } = req.body;
     const updateSong = await pool.query(
-      "UPDATE songs SET lyrics = $1, chords = $2, genretag = $3, updated_on = current_timestamp WHERE email = $4 AND title = $5",
-      [lyrics, chords, genretag, userEmail, title]
+      "UPDATE songs SET lyrics = $1, chords = $2, genre = $3, updated_on = current_timestamp WHERE email = $4 AND title = $5",
+      [lyrics, chords, genre, userEmail, title]
     );
     res.json(updateSong);
   } catch (error) {

@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
 
-const AddSongForm = () => {
+const CreateSongForm = () => {
   const reactCtx = useContext(ReactContext);
 
   //   console.log(reactCtx.accessToken);
   let content = "";
   console.log("View Added Song");
-  console.log(reactCtx.viewAddedSong);
+  console.log(reactCtx.addedSong);
 
   if (reactCtx.accessToken) {
-    if (reactCtx.addedSong) {
-      content = <div>{reactCtx.AddedSong}</div>;
+    if (reactCtx.addedSong.rowCount === 1) {
+      content = <div>Created Song Successfully!</div>;
     }
 
     if (reactCtx.error) {
@@ -22,14 +22,14 @@ const AddSongForm = () => {
       content = <p>Loading .. please wait</p>;
     }
   } else {
-    content = <p>Add Song: Not Authorized</p>;
+    content = <p>Create/Add Song: Not Authorized</p>;
   }
   return (
     <>
       <div className="centered">
         <div className="container">
           <span>
-            <h2>Add Song</h2> {content}
+            <h2>Create/Add Song</h2> {content}
           </span>
 
           <form onSubmit={reactCtx.handleAddSongSubmit}>
@@ -59,7 +59,7 @@ const AddSongForm = () => {
               <div className="col-md-5">
                 <textarea
                   rows="18"
-                  cols="60"
+                  cols="70"
                   name="lyrics"
                   value={reactCtx.lyricsInput}
                   onChange={reactCtx.handleLyricsInput}
@@ -77,7 +77,7 @@ const AddSongForm = () => {
               <div className="col-md-5">
                 <textarea
                   rows="5"
-                  cols="60"
+                  cols="70"
                   name="chords"
                   value={reactCtx.chordsInput}
                   onChange={reactCtx.handleChordsInput}
@@ -95,8 +95,8 @@ const AddSongForm = () => {
               <div className="col-md-5">
                 <select
                   name="genre1"
-                  onChange={reactCtx.handleGenreTagInput}
-                  value={reactCtx.genreTagInput}
+                  onChange={reactCtx.handleGenreInput}
+                  value={reactCtx.genreInput}
                 >
                   <option value="">None Selected</option>
                   <option value="Classic Rock">Classic Rock</option>
@@ -133,9 +133,13 @@ const AddSongForm = () => {
                   <option value="Hip Hop">Hip Hop</option>
                 </select>
               </div> */}
-              <button className="btn btn-success" type="submit">
-                Submit
-              </button>
+              <div className="col-md-7"></div>
+              <div className="col-md-2"> {reactCtx.inputsCheck}</div>
+              <div className="col-md-3">
+                <button className="btn btn-success" type="submit">
+                  Submit
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -144,4 +148,4 @@ const AddSongForm = () => {
   );
 };
 
-export default AddSongForm;
+export default CreateSongForm;

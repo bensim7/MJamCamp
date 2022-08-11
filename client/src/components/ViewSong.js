@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactContext from "../context/react.context";
-import DeleteSong from "./DeleteSong";
+// import DeleteSong from "./DeleteSong";
 import SearchSongForm from "./SearchSongForm";
 // import UpdateSong from "./UpdateSong";
 import UpdateSongModal from "./UpdateSongModal";
@@ -104,38 +104,36 @@ const ViewSong = () => {
   if (viewSong) {
     content = viewSong.map((item) => {
       return (
-        <div className="container">
-          <li>
+        <li>
+          <div className="row">
+            <div className="col-sm-3">Title: </div>
+            <div className="col-sm-5">{item.title}</div>
+          </div>
+          <div>
             <div className="row">
-              <div className="col-sm-3">Title: </div>{" "}
-              <div className="col-sm-9">{item.title}</div>
+              <div className="col-sm-3">Lyrics: </div>
+              <div className="col-sm-5"> {item.lyrics} </div>
             </div>
-            <div>
-              <div className="row">
-                <div className="col-sm-3">Lyrics: </div>
-                <div className="col-sm-9"> {item.lyrics} </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-3">Chords: </div>
-              <div className="col-sm-9">{item.chords}</div>
-            </div>
-            <div className="row">
-              <div className="col-sm-3">Genre: </div>
-              <div className="col-sm-9">{item.genretag}</div>
-            </div>
-            <div className="row">
-              <div className="col-sm-3">Created On: </div>
-              <div className="col-sm-9">{item.created_on}</div>
-            </div>
-            <div className="row">
-              <div className="col-sm-3">Email: </div>
-              <div className="col-sm-9">{item.email}</div>
-            </div>
-            <br />
-            <br />
-          </li>
-        </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-3">Chords: </div>
+            <div className="col-sm-5">{item.chords}</div>
+          </div>
+          <div className="row">
+            <div className="col-sm-3">Genre: </div>
+            <div className="col-sm-5">{item.genre}</div>
+          </div>
+          <div className="row">
+            <div className="col-sm-3">Created On: </div>
+            <div className="col-sm-5">{item.created_on}</div>
+          </div>
+          <div className="row">
+            <div className="col-sm-3">Email: </div>
+            <div className="col-sm-5">{item.email}</div>
+          </div>
+          <br />
+          <br />
+        </li>
       );
     });
   }
@@ -166,9 +164,9 @@ const ViewSong = () => {
           </button>
         </form>
       </div> */}
-      <div className="deleteSong">
+      {/* <div className="deleteSong">
         <DeleteSong />
-      </div>
+      </div> */}
 
       <SearchSongForm />
       <br />
@@ -182,7 +180,7 @@ const ViewSong = () => {
         <button onClick={handleAllSongs} className="btn btn-outline-warning">
           View All Songs
         </button>
-        <div className="mt-5">
+        <div className="container mt-5">
           <ol>{content}</ol>
         </div>
       </div>

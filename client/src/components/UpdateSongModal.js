@@ -23,7 +23,7 @@ function UpdateSongModal(props) {
       title: callTitle,
       lyrics: updateLyrics,
       chords: updateChords,
-      update: updateGenre,
+      genre: updateGenre,
     };
 
     const url = "http://localhost:5001/songs/updatesong";
@@ -164,7 +164,7 @@ function UpdateSongModal(props) {
                 </div>
                 <div className="col-sm-5">
                   <select
-                    name="genre1"
+                    name="genre"
                     onChange={handleUpdateGenreInput}
                     value={updateGenre}
                   >

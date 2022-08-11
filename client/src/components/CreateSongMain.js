@@ -1,16 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactContext from "../context/react.context";
-import AddSongForm from "./AddSongForm";
+import CreateSongForm from "./CreateSongForm";
 
-const AddSongMain = () => {
+const CreateSongMain = () => {
   const reactCtx = useContext(ReactContext);
   const [titleInput, setTitleInput] = useState("");
   const [lyricsInput, setLyricsInput] = useState("");
   const [chordsInput, setChordsInput] = useState("");
-  const [genreTagInput, setGenreTagInput] = useState();
+  const [genreInput, setGenreInput] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [addedSong, setAddedSong] = useState("");
+  const [validFields, setValidFields] = useState(false);
+  const [inputsCheck, setInputsCheck] = useState("");
   // const [viewSong, setViewSong] = useState([]);
   const accessToken = reactCtx.loginData;
 
@@ -18,7 +20,7 @@ const AddSongMain = () => {
   // Add Song
   ////////////////////////////////
 
-  const addSong = async () => {
+  const CreateSong = async () => {
     setIsLoading(true);
     setError(null);
 
@@ -26,7 +28,7 @@ const AddSongMain = () => {
       title: titleInput,
       lyrics: lyricsInput,
       chords: chordsInput,
-      genretag: genreTagInput,
+      genre: genreInput,
     };
     console.log(body);
 
@@ -59,14 +61,26 @@ const AddSongMain = () => {
   console.log(addedSong);
 
   ///////////////////////////////
-  // Add Song Submit Function
+  // Create Add Song Submit Function
   ///////////////////////////////
+
+  useEffect(() => {
+    setValidFields(
+      titleInput !== "" &&
+        lyricsInput !== "" &&
+        chordsInput !== "" &&
+        genreInput !== ""
+    );
+  }, [titleInput, lyricsInput, chordsInput, genreInput]);
 
   const handleAddSongSubmit = (event) => {
     event.preventDefault();
-    addSong(titleInput, lyricsInput, chordsInput);
+    if (validFields) {
+      CreateSong();
+    } else {
+      setInputsCheck("Please fill in all input fields");
+    }
   };
-
   const handleTitleInput = (event) => {
     setTitleInput(event.target.value);
   };
@@ -79,8 +93,8 @@ const AddSongMain = () => {
     setChordsInput(event.target.value);
   };
 
-  const handleGenreTagInput = (event) => {
-    setGenreTagInput(event.target.value);
+  const handleGenreInput = (event) => {
+    setGenreInput(event.target.value);
   };
 
   return (
@@ -90,19 +104,20 @@ const AddSongMain = () => {
           titleInput,
           lyricsInput,
           chordsInput,
-          genreTagInput,
+          genreInput,
           handleAddSongSubmit,
           handleTitleInput,
           handleLyricsInput,
           handleChordsInput,
-          handleGenreTagInput,
+          handleGenreInput,
           isLoading,
           error,
           addedSong,
           accessToken,
+          inputsCheck,
         }}
       >
-        <AddSongForm />
+        <CreateSongForm />
       </ReactContext.Provider>
       {/* <form onSubmit={handleAddSongSubmit}>
         <label>
@@ -141,4 +156,4 @@ const AddSongMain = () => {
   );
 };
 
-export default AddSongMain;
+export default CreateSongMain;

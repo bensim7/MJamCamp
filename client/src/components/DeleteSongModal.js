@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactContext from "../context/react.context";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-const DeleteSong = () => {
+const DeleteSongModal = (props) => {
   const reactCtx = useContext(ReactContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -92,32 +94,53 @@ const DeleteSong = () => {
     content = <p>Delete Song: Not Authorized</p>;
   }
   return (
-    <div>
-      <div className="container">
-        <form onSubmit={handleDeleteSubmit}>
-          <div className="row">
-            <div className="col-md-3">
-              <label>Delete Song: </label>
-            </div>
-            <div className="col-md-7">
-              <input
-                name="title"
-                value={deleteTitleInput}
-                onChange={handleDeleteInput}
-                placeholder="Choose Song to Delete"
-              />
-            </div>
-            <div className="col-md-1">
-              <button type="submit" className="btn btn-outline-light">
-                Delete
-              </button>
-            </div>
+    <Modal
+      className="modalRegister"
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      color="black"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Delete a song
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div>
+          {content}
+          <div className="container">
+            <form onSubmit={handleDeleteSubmit}>
+              <div className="row">
+                <div className="col-md-3">
+                  <label>Delete Song: </label>
+                </div>
+                <div className="col-md-7">
+                  <input
+                    name="title"
+                    value={deleteTitleInput}
+                    onChange={handleDeleteInput}
+                    placeholder="Choose Song to Delete"
+                  />
+                </div>
+                <div className="col-md-1">
+                  <button type="submit" className="btn btn-outline-danger">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
-        {content}
-      </div>
-    </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button className="btn btn-outline-dark" onClick={props.onHide}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
-export default DeleteSong;
+export default DeleteSongModal;

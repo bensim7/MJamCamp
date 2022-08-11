@@ -9,6 +9,7 @@ CREATE TABLE users (
   email VARCHAR ( 255 ) UNIQUE NOT NULL PRIMARY KEY,
   musictype VARCHAR (50) NOT NULL,
   location VARCHAR (50),
+  contact VARCHAR (50),
   isadmin BOOLEAN,
   Matches VARCHAR [],
   Messages Text [],
@@ -23,7 +24,7 @@ CREATE TABLE songs (
   title VARCHAR (50) UNIQUE NOT NULL PRIMARY KEY,
   lyrics TEXT NOT NULL,
   chords TEXT,
-  genretag VARCHAR [],
+  genre TEXT,
   created_on TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
   updated_on TIMESTAMP WITH TIME ZONE
 );

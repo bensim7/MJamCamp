@@ -7,10 +7,11 @@ const LoginForm = () => {
   const reactCtx = useContext(ReactContext);
   const [modalShow, setModalShow] = useState(false);
 
+  const accessToken = reactCtx.loginData;
   let content = "";
-  console.log(reactCtx.loginData);
+  console.log(accessToken);
 
-  if (reactCtx.loginData) {
+  if (accessToken) {
     content = (
       <div>
         <h3>Login Successful</h3>

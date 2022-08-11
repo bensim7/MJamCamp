@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
 import UpdateSongModal from "./UpdateSongModal";
+import DeleteSongModal from "./DeleteSongModal";
 import Button from "react-bootstrap/Button";
 
 const SearchSongForm = () => {
@@ -9,7 +10,8 @@ const SearchSongForm = () => {
   const [isLoading, setIsLoading] = useState("");
   const [error, setError] = useState(false);
   const [searchedSongData, setSearchedSongData] = useState("");
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShowUpdate, setModalShowUpdate] = useState(false);
+  const [modalShowDelete, setModalShowDelete] = useState(false);
 
   const accessToken = reactCtx.loginData;
 
@@ -61,17 +63,30 @@ const SearchSongForm = () => {
     if (searchedSongData[0]) {
       content = (
         <div className="container">
-          <div className="row">Title: {searchedSongData[0].title}</div>
-          <br />
           <div className="row">
-            <div className="col-md-6">Lyrics: {searchedSongData[0].lyrics}</div>
-            <div className="col-md-6">Chords{searchedSongData[0].chords}</div>
+            <div className="col-md-0"></div>
+            <div className="col-md-9">Title: {searchedSongData[0].title}</div>
+            <div className="col-md-3"></div>
           </div>
           <br />
           <div className="row">
-            <div>Genre: {searchedSongData[0].genretag}</div>
-            <div>Created On:{searchedSongData[0].created_on}</div>
-            <div>Email: {searchedSongData[0].email}</div>
+            <div className="col-md-0"></div>
+            <div className="col-md-9">Lyrics:</div>
+            <div className="col-md-3">Chords:</div>
+          </div>
+          <div className="row">
+            <div className="col-md-9">{searchedSongData[0].lyrics}</div>
+            <div className="col-md-3">{searchedSongData[0].chords}</div>
+          </div>
+          <br />
+          <div className="row">
+            <div className="col-md-3">
+              Genre: {searchedSongData[0].genretag}
+            </div>
+            <div className="col-md-3">
+              Created On: {searchedSongData[0].created_on}
+            </div>
+            <div className="col-md-3">Email: {searchedSongData[0].email}</div>
           </div>
         </div>
       );
@@ -97,10 +112,10 @@ const SearchSongForm = () => {
         <div className="container searchSong">
           <form onSubmit={handleSearchedSongSubmit}>
             <div className="row">
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label>Search Song:</label>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-4">
                 <input
                   name="title"
                   value={titleSearchInput}
@@ -113,18 +128,34 @@ const SearchSongForm = () => {
                   Search
                 </button>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <Button
                   variant="outline-warning"
-                  onClick={() => setModalShow(true)}
+                  onClick={() => setModalShowUpdate(true)}
                 >
                   Edit Song
+                </Button>
+              </div>
+              <div className="col-md-2">
+                <Button
+                  variant="outline-danger"
+                  onClick={() => setModalShowDelete(true)}
+                >
+                  Delete Song
                 </Button>
               </div>
             </div>
           </form>
         </div>
-        <UpdateSongModal show={modalShow} onHide={() => setModalShow(false)} />
+        <UpdateSongModal
+          show={modalShowUpdate}
+          onHide={() => setModalShowUpdate(false)}
+        />
+        <DeleteSongModal
+          show={modalShowDelete}
+          onHide={() => setModalShowDelete(false)}
+        />
+        <br />
         {content}
       </div>
     </>

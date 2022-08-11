@@ -5,8 +5,9 @@ import "./App.css";
 import ReactContext from "./context/react.context";
 import LoginForm from "./components/LoginForm";
 import ViewUser from "./components/ViewUser";
-import AddSongMain from "./components/AddSongMain";
+import CreateSongMain from "./components/CreateSongMain";
 import ViewSong from "./components/ViewSong";
+import MatchUser from "./components/MatchUser";
 
 function App() {
   const [emailInput, setEmailInput] = useState("");
@@ -111,10 +112,10 @@ function App() {
             }
           />
           <Route
-            path="/Addsong"
+            path="/Createsong"
             element={
               <ReactContext.Provider value={{ loginData }}>
-                <AddSongMain />
+                <CreateSongMain />
               </ReactContext.Provider>
             }
           />
@@ -123,6 +124,14 @@ function App() {
             element={
               <ReactContext.Provider value={{ loginData }}>
                 <ViewSong />
+              </ReactContext.Provider>
+            }
+          />
+          <Route
+            path="/Usermatch"
+            element={
+              <ReactContext.Provider value={{ loginData }}>
+                <MatchUser />
               </ReactContext.Provider>
             }
           />

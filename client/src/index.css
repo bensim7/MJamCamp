@@ -40,6 +40,11 @@ html {
   text-shadow: 0px 0px #000000;
 }
 
+.modalUpdateUser {
+  color: black;
+  text-shadow: 0px 0px #000000;
+}
+
 body {
   margin: 0;
   background-color: var(--cobalt);
@@ -120,7 +125,15 @@ header {
 }
 
 .searchSong {
-  width: 45%;
+  width: 60%;
   margin: auto;
   margin-top: 2em;
+}
+
+.accountDetails {
+  margin: 0 auto;
+}
+
+.matchSearch {
+  width: 50%;
 }
