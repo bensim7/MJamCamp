@@ -60,19 +60,19 @@ const MatchUserSongLyrics = () => {
         return (
           <li>
             <div className="row">
-              <div className="col-sm-3">User Name:</div>
+              <div className="col-sm-4">User Name:</div>
               <div className="col-sm-3">{item.username}</div>
             </div>
             <div className="row">
-              <div className="col-sm-3">Title:</div>
+              <div className="col-sm-4">Title:</div>
               <div className="col-sm-3"> {item.title}</div>
             </div>
             <div className="row">
-              <div className="col-sm-3">Location - Optional:</div>
+              <div className="col-sm-4">Location - Optional:</div>
               <div className="col-sm-3"> {item.location}</div>
             </div>
             <div className="row">
-              <div className="col-sm-3">Contact - Optional:</div>
+              <div className="col-sm-4">Contact - Optional:</div>
               <div className="col-sm-3"> {item.contact}</div>
             </div>
             <br />

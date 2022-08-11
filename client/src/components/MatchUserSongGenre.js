@@ -1,24 +1,24 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
 
-const MatchUserSongTitle = () => {
+const MatchUserSongGenre = () => {
   const reactCtx = useContext(ReactContext);
-  const [titleInput, setTitleInput] = useState("");
+  const [genreInput, setGenreInput] = useState("");
   const [isLoading, setIsLoading] = useState("");
   const [error, setError] = useState(false);
-  const [userMatchTitleData, setUserMatchTitleData] = useState([]);
+  const [userMatchGenreData, setUserMatchGenreData] = useState([]);
 
   const accessToken = reactCtx.loginData;
 
-  const fetchUserMatchSongTitle = async () => {
+  const fetchUserMatchSongGenre = async () => {
     setIsLoading(true);
     setError(null);
 
     const body = {
-      title: titleInput,
+      genre: genreInput,
     };
 
-    const url = "http://localhost:5001/users/getuserbysongtitle";
+    const url = "http://localhost:5001/users/getuserbysonggenre";
 
     const config = {
       method: "POST",
@@ -35,28 +35,28 @@ const MatchUserSongTitle = () => {
         throw new Error("Unable to find users");
       }
       const data = await res.json();
-      setUserMatchTitleData(data);
+      setUserMatchGenreData(data);
     } catch (error) {
       setError(error.message);
     }
     setIsLoading(false);
   };
 
-  console.log(userMatchTitleData);
+  console.log(userMatchGenreData);
 
-  const handleUserMatchTitleSubmit = (event) => {
+  const handleUserMatchGenreSubmit = (event) => {
     event.preventDefault();
-    fetchUserMatchSongTitle();
+    fetchUserMatchSongGenre();
   };
 
-  const handleTitleInput = (event) => {
-    setTitleInput(event.target.value);
+  const handleGenreInput = (event) => {
+    setGenreInput(event.target.value);
   };
 
   let content = "";
   if (accessToken) {
-    if (userMatchTitleData) {
-      content = userMatchTitleData.map((item) => {
+    if (userMatchGenreData) {
+      content = userMatchGenreData.map((item) => {
         return (
           <li>
             <div className="row">
@@ -64,8 +64,8 @@ const MatchUserSongTitle = () => {
               <div className="col-sm-3">{item.username}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Title:</div>
-              <div className="col-sm-3"> {item.title}</div>
+              <div className="col-sm-4">Genre of song:</div>
+              <div className="col-sm-3"> {item.genre}</div>
             </div>
             <div className="row">
               <div className="col-sm-4">Location - Optional:</div>
@@ -96,20 +96,27 @@ const MatchUserSongTitle = () => {
   return (
     <>
       <div className="container matchSearch mt-5">
-        <form onSubmit={handleUserMatchTitleSubmit}>
+        <form onSubmit={handleUserMatchGenreSubmit}>
           <div className="row">
             <div className="col-sm-3">
-              <label>Search User By Song Title:</label>
-            </div>
-            <div className="col-sm-5">
-              <input
-                name="title"
-                value={titleInput}
-                onChange={handleTitleInput}
-                placeholder="Enter Song Title or Partial Title"
-              />
+              <label>Search User By Song Genre:</label>
             </div>
             <div className="col-sm-2">
+              <select name="genre" onChange={handleGenreInput}>
+                <option value="">None Selected</option>
+                <option value="Classic Rock">Classic Rock</option>
+                <option value="Alternative Rock">Alternative Rock</option>
+                <option value="Indie">Indie</option>
+                <option value="Pop">Pop</option>
+                <option value="Grunge">Grunge</option>
+                <option value="Metal">Metal</option>
+                <option value="Nu Metal">Nu Metal</option>
+                <option value="Blues">Blues</option>
+                <option value="Funk">Funk</option>
+                <option value="Hip Hop">Hip Hop</option>
+              </select>
+            </div>
+            <div className="col-sm-3">
               <button type="submit" className="btn btn-outline-light">
                 Search
               </button>
@@ -124,4 +131,4 @@ const MatchUserSongTitle = () => {
   );
 };
 
-export default MatchUserSongTitle;
+export default MatchUserSongGenre;

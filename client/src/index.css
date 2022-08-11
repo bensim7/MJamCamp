@@ -48,7 +48,6 @@ html {
 body {
   margin: 0;
   background-color: var(--cobalt);
-  /* background-image: url("./image/Background.jpg"); */
   background-size: cover;
   background-blend-mode: lighten;
   color: white;
@@ -80,12 +79,6 @@ body {
 
 .upperCase {
   text-transform: uppercase;
-}
-
-.hideComponent {
-  /* visibility: hidden; */
-  display: none;
-  /* opacity: 0; */
 }
 
 .listCenter {

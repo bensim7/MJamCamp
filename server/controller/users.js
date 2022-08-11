@@ -296,7 +296,7 @@ router.post("/getuserbysonggenre", auth, async (req, res) => {
 
 //////////////////////////////////////////////
 // Search User Based on lyrics in songs table
-/////////////////////////////////////////////
+//////////////////////////////////////////////
 
 router.post("/getuserbysonglyrics", auth, async (req, res) => {
   try {
@@ -307,12 +307,6 @@ router.post("/getuserbysonglyrics", auth, async (req, res) => {
       );
       res.json(getUserBySongLyrics.rows);
     }
-    // else {
-    //   res
-    //     .status(400)
-    //     .json({ status: "error", message: "Please key in an input" });
-    // }
-    // Above has conflict with front end as front end displays fetched data with fetchedData.username, fetchedData.musictype etc
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ status: "error", message: "An error has occured" });
@@ -332,12 +326,6 @@ router.post("/getuserbysongtitle", auth, async (req, res) => {
       );
       res.json(getUserBySongTitle.rows);
     }
-    // else {
-    //   res
-    //     .status(400)
-    //     .json({ status: "error", message: "Please key in an input" });
-    // }
-    // Above has conflict with front end as front end shows fetched data with fetchedData.username, fetchedData.musictype etc
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ status: "error", message: "An error has occured" });

@@ -10,6 +10,7 @@ import ViewSong from "./components/ViewSong";
 import MatchUserRole from "./components/MatchUserRole";
 import MatchUserSongTitle from "./components/MatchUserSongTitle";
 import MatchUserSongLyrics from "./components/MatchUserSongLyrics";
+import MatchUserSongGenre from "./components/MatchUserSongGenre";
 import RequireLogin from "./components/RequireLogin";
 
 function App() {
@@ -164,8 +165,8 @@ function App() {
               path="/Usermatch"
               element={
                 <ReactContext.Provider value={{ loginData }}>
-                  <MatchUserRole /> <MatchUserSongTitle />{" "}
-                  <MatchUserSongLyrics />
+                  <MatchUserRole /> <MatchUserSongGenre />
+                  <MatchUserSongTitle /> <MatchUserSongLyrics />
                 </ReactContext.Provider>
               }
             />

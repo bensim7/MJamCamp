@@ -130,11 +130,7 @@ const UpdateSong = () => {
           </div>
           <div>
             <label>Update Genre:</label>
-            <select
-              name="genre1"
-              onChange={handleUpdateGenreInput}
-              value={updateGenre}
-            >
+            <select name="genre1" onChange={handleUpdateGenreInput}>
               <option value="">None Selected</option>
               <option value="Classic Rock">Classic Rock</option>
               <option value="Alternative Rock">Alternative Rock</option>

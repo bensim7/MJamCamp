@@ -93,11 +93,7 @@ const CreateSongForm = () => {
                 </label>
               </div>
               <div className="col-md-5">
-                <select
-                  name="genre1"
-                  onChange={reactCtx.handleGenreInput}
-                  value={reactCtx.genreInput}
-                >
+                <select name="genre" onChange={reactCtx.handleGenreInput}>
                   <option value="">None Selected</option>
                   <option value="Classic Rock">Classic Rock</option>
                   <option value="Alternative Rock">Alternative Rock</option>
@@ -113,26 +109,6 @@ const CreateSongForm = () => {
               </div>
             </div>
             <div className="row mt-3">
-              {/* <div className="col-md-4">
-                <label>
-                  <h5>Select Genre 02</h5>
-                </label>
-              </div>
-              <div className="col-md-5">
-                <select name="genre2" onChange={reactCtx.handleGenreTagInput}>
-                  <option value="">None Selected</option>
-                  <option value="Classic Rock">Classic Rock</option>
-                  <option value="Alternative Rock">Alternative Rock</option>
-                  <option value="Indie">Indie</option>
-                  <option value="Pop">Pop</option>
-                  <option value="Grunge">Grunge</option>
-                  <option value="Metal">Metal</option>
-                  <option value="Nu Metal">Nu Metal</option>
-                  <option value="Blues">Blues</option>
-                  <option value="Funk">Funk</option>
-                  <option value="Hip Hop">Hip Hop</option>
-                </select>
-              </div> */}
               <div className="col-md-7"></div>
               <div className="col-md-2"> {reactCtx.inputsCheck}</div>
               <div className="col-md-3">
