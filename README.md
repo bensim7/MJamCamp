@@ -38,6 +38,8 @@ Bootstrap was also used style eg. Bootstrap Modals, Buttons, Bootstrap Grids.
 
 ![Database](/README_img/Database.jpg)
 
+---
+
 ## Codes
 
 ![ViewUser1](/README_img/ViewUser1.jpg)
