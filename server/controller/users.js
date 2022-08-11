@@ -144,25 +144,25 @@ router.post(
 );
 
 //////////////////////////////////////////////////////////////////////////////////
-// Seed Users (For Developer Testing)
-// Uncomment below to seed users without hashed password for developer testing
+// Seed Users (For developer use)
+// Uncomment below to seed users without hashed password for developer use
 //////////////////////////////////////////////////////////////////////////////////
 
-router.post("/seedusers", auth, async (req, res) => {
-  try {
-    // const hash = await bcrypt.hash(password, 12);
-    const seedUsers = await pool.query(
-      // "INSERT INTO users (username, password, email, contact, musictype, location) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
-      // [username, hash, email, contact, musictype, location]
-      "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
-    );
+// router.post("/seedusers", auth, async (req, res) => {
+//   try {
+//     // const hash = await bcrypt.hash(password, 12);
+//     const seedUsers = await pool.query(
+//       // "INSERT INTO users (username, password, email, contact, musictype, location) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
+//       // [username, hash, email, contact, musictype, location]
+//       "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
+//     );
 
-    res.json(seedUsers.rows);
-  } catch (error) {
-    console.log("POST /seedusers ", error);
-    res.status(400).json({ status: "error", message: "An error has occured" });
-  }
-});
+//     res.json(seedUsers.rows);
+//   } catch (error) {
+//     console.log("POST /seedusers ", error);
+//     res.status(400).json({ status: "error", message: "An error has occured" });
+//   }
+// });
 
 // Get all users
 router.get("/allusers", auth, async (req, res) => {
