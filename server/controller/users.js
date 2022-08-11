@@ -11,7 +11,7 @@ const pool = require("../db");
 const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
-router.get("/testing", async (req, res) => {
+router.get("/testing", auth, async (req, res) => {
   try {
     res.send("users controller works");
   } catch (error) {
@@ -122,7 +122,8 @@ router.post(
       if (existingUser.rows.length !== 0 || password !== password1) {
         return res.status(400).json({
           status: "error",
-          message: "Duplicate Username or password inputs do not match",
+          message:
+            "Email address is already used or password inputs do not match",
         });
       }
 
@@ -134,13 +135,34 @@ router.post(
 
       res.json(newUser.rows);
     } catch (error) {
-      console.log("POST /create ", error);
+      console.log("POST /createuser ", error);
       res
         .status(400)
         .json({ status: "error", message: "An error has occured" });
     }
   }
 );
+
+//////////////////////////////////////////////////////////////////////////////////
+// Seed Users (For Developer Testing)
+// Uncomment below to seed users without hashed password for developer testing
+//////////////////////////////////////////////////////////////////////////////////
+
+router.post("/seedusers", auth, async (req, res) => {
+  try {
+    // const hash = await bcrypt.hash(password, 12);
+    const seedUsers = await pool.query(
+      // "INSERT INTO users (username, password, email, contact, musictype, location) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
+      // [username, hash, email, contact, musictype, location]
+      "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
+    );
+
+    res.json(seedUsers.rows);
+  } catch (error) {
+    console.log("POST /seedusers ", error);
+    res.status(400).json({ status: "error", message: "An error has occured" });
+  }
+});
 
 // Get all users
 router.get("/allusers", auth, async (req, res) => {
@@ -237,9 +259,9 @@ router.delete("/deleteuser", auth, async (req, res) => {
   }
 });
 
-///////////////////////////////
-// Get User Based on music role
-////////////////////////////////
+//////////////////////////////////////////////////
+// Search User Based on music role in users table
+//////////////////////////////////////////////////
 
 router.post("/getuserbyrole", auth, async (req, res) => {
   try {
@@ -249,6 +271,73 @@ router.post("/getuserbyrole", auth, async (req, res) => {
     );
 
     res.json(getUserByRole.rows);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ status: "error", message: "An error has occured" });
+  }
+});
+
+//////////////////////////////////////////////
+// Search User Based on genre in songs table
+/////////////////////////////////////////////
+
+router.post("/getuserbysonggenre", auth, async (req, res) => {
+  try {
+    const { genre } = req.body;
+    const getUserBySongGenre = await pool.query(
+      `SELECT username, musictype, location, contact, genre FROM users INNER JOIN songs ON users.email = songs.email WHERE genre='${genre}'`
+    );
+    res.json(getUserBySongGenre.rows);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ status: "error", message: "An error has occured" });
+  }
+});
+
+//////////////////////////////////////////////
+// Search User Based on lyrics in songs table
+/////////////////////////////////////////////
+
+router.post("/getuserbysonglyrics", auth, async (req, res) => {
+  try {
+    const { lyrics } = req.body;
+    if (lyrics !== "") {
+      const getUserBySongLyrics = await pool.query(
+        `SELECT username, musictype, location, contact, title FROM users INNER JOIN songs ON users.email = songs.email WHERE lyrics LIKE '%${lyrics}%'`
+      );
+      res.json(getUserBySongLyrics.rows);
+    }
+    // else {
+    //   res
+    //     .status(400)
+    //     .json({ status: "error", message: "Please key in an input" });
+    // }
+    // Above has conflict with front end as front end displays fetched data with fetchedData.username, fetchedData.musictype etc
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ status: "error", message: "An error has occured" });
+  }
+});
+
+//////////////////////////////////////////////////
+// Search User Based on song title in songs table
+//////////////////////////////////////////////////
+
+router.post("/getuserbysongtitle", auth, async (req, res) => {
+  try {
+    const { title } = req.body;
+    if (title !== "") {
+      const getUserBySongTitle = await pool.query(
+        `SELECT username, musictype, location, contact, title FROM users INNER JOIN songs ON users.email = songs.email WHERE title LIKE '%${title}%'`
+      );
+      res.json(getUserBySongTitle.rows);
+    }
+    // else {
+    //   res
+    //     .status(400)
+    //     .json({ status: "error", message: "Please key in an input" });
+    // }
+    // Above has conflict with front end as front end shows fetched data with fetchedData.username, fetchedData.musictype etc
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ status: "error", message: "An error has occured" });

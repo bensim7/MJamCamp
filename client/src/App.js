@@ -7,7 +7,10 @@ import LoginForm from "./components/LoginForm";
 import ViewUser from "./components/ViewUser";
 import CreateSongMain from "./components/CreateSongMain";
 import ViewSong from "./components/ViewSong";
-import MatchUser from "./components/MatchUser";
+import MatchUserRole from "./components/MatchUserRole";
+import MatchUserSongTitle from "./components/MatchUserSongTitle";
+import MatchUserSongLyrics from "./components/MatchUserSongLyrics";
+import RequireLogin from "./components/RequireLogin";
 
 function App() {
   const [emailInput, setEmailInput] = useState("");
@@ -46,7 +49,22 @@ function App() {
     }
     setIsLoading(false);
   };
-  console.log(loginData);
+
+  /////////////////////////////////////////////
+  // Local Storage
+  /////////////////////////////////////////////
+  useEffect(() => {
+    localStorage.setItem("loginAccess", loginData);
+  }, [loginData]);
+
+  ////////////////////////////////////////////
+  // Logout
+  ////////////////////////////////////////////
+  const logOut = () => {
+    localStorage.setItem("loginAccess", "");
+    alert("Logged out");
+  };
+
   ///////////////////////
   // Submit Function
   ///////////////////////
@@ -64,6 +82,8 @@ function App() {
     if (validFields) {
       if (emailInput.match(emailCheck) && passwordInput.length >= 12) {
         fetchLogin();
+        setEmailInput("");
+        setPasswordInput("");
       } else if (!emailInput.match(emailCheck)) {
         setLoginInvalid({ email: "Please enter a valid email" });
       } else if (passwordInput.length < 12) {
@@ -83,7 +103,19 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1 className="pt-3 pb-3">MJC</h1>
+        <div className="container pt-3">
+          <div className="row">
+            <div className="col-sm-3">
+              <h1>MJC</h1>
+            </div>
+            <div className="col-sm-3 pt-3">
+              <h5>Music Tracker and User Match</h5>
+            </div>
+          </div>
+        </div>
+        <button className="btn btn-outline-light logOut" onClick={logOut}>
+          Log Out
+        </button>
         <NavBar />
       </header>
 
@@ -111,30 +143,33 @@ function App() {
               </ReactContext.Provider>
             }
           />
-          <Route
-            path="/Createsong"
-            element={
-              <ReactContext.Provider value={{ loginData }}>
-                <CreateSongMain />
-              </ReactContext.Provider>
-            }
-          />
-          <Route
-            path="/Searchsong"
-            element={
-              <ReactContext.Provider value={{ loginData }}>
-                <ViewSong />
-              </ReactContext.Provider>
-            }
-          />
-          <Route
-            path="/Usermatch"
-            element={
-              <ReactContext.Provider value={{ loginData }}>
-                <MatchUser />
-              </ReactContext.Provider>
-            }
-          />
+          <Route element={<RequireLogin />}>
+            <Route
+              path="/Createsong"
+              element={
+                <ReactContext.Provider value={{ loginData }}>
+                  <CreateSongMain />
+                </ReactContext.Provider>
+              }
+            />
+            <Route
+              path="/Searchsong"
+              element={
+                <ReactContext.Provider value={{ loginData }}>
+                  <ViewSong />
+                </ReactContext.Provider>
+              }
+            />
+            <Route
+              path="/Usermatch"
+              element={
+                <ReactContext.Provider value={{ loginData }}>
+                  <MatchUserRole /> <MatchUserSongTitle />{" "}
+                  <MatchUserSongLyrics />
+                </ReactContext.Provider>
+              }
+            />
+          </Route>
         </Routes>
       </main>
     </div>

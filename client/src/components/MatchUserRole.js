@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import ReactContext from "../context/react.context";
 
-const MatchUser = () => {
+const MatchUserRole = () => {
   const reactCtx = useContext(ReactContext);
   const [musicTypeInput, setMusicTypeInput] = useState("");
   const [isLoading, setIsLoading] = useState("");
@@ -10,7 +10,7 @@ const MatchUser = () => {
 
   const accessToken = reactCtx.loginData;
 
-  const fetchUserMatch = async () => {
+  const fetchUserMatchRole = async () => {
     setIsLoading(true);
     setError(null);
 
@@ -46,7 +46,7 @@ const MatchUser = () => {
 
   const handleUserMatchSubmit = (event) => {
     event.preventDefault();
-    fetchUserMatch();
+    fetchUserMatchRole();
   };
 
   const handleMusicTypeInput = (event) => {
@@ -54,55 +54,54 @@ const MatchUser = () => {
   };
 
   let content = "";
+  if (accessToken) {
+    if (userMatchData) {
+      content = userMatchData.map((item) => {
+        return (
+          <li>
+            <div className="row">
+              <div className="col-sm-3">User Name:</div>{" "}
+              <div className="col-sm-3">{item.username}</div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3">Role:</div>{" "}
+              <div className="col-sm-3"> {item.musictype}</div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3">Location - Optional:</div>
+              <div className="col-sm-3"> {item.location}</div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3">Contact - Optional:</div>
+              <div className="col-sm-3"> {item.contact}</div>
+            </div>
+            <br />
+            <br />
+          </li>
+        );
+      });
+    }
 
-  if (userMatchData) {
-    content = userMatchData.map((item) => {
-      return (
-        <li>
-          <div className="row">
-            <div className="col-sm-3">User Name:</div>{" "}
-            <div className="col-sm-3">{item.username}</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-3">Role:</div>{" "}
-            <div className="col-sm-3"> {item.musictype}</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-3">Location:</div>
-            <div className="col-sm-3"> {item.location}</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-3">Contact:</div>
-            <div className="col-sm-3"> {item.contact}</div>
-          </div>
-          <br />
-          <br />
-        </li>
-      );
-    });
-  }
+    if (error) {
+      content = { error };
+    }
 
-  if (error) {
-    content = { error };
-  }
-
-  if (isLoading) {
-    content = <p>Loading .. Please wait</p>;
+    if (isLoading) {
+      content = <p>Loading .. Please wait</p>;
+    }
+  } else {
+    content = <p>Search Not Authorized</p>;
   }
   return (
     <>
       <div className="container matchSearch mt-5">
         <form onSubmit={handleUserMatchSubmit}>
           <div className="row">
-            <div className="col-sm-5">
+            <div className="col-sm-3">
               <label>Search User By Role Entered:</label>
             </div>
             <div className="col-sm-2">
-              <select
-                name="musictype"
-                value={musicTypeInput}
-                onChange={handleMusicTypeInput}
-              >
+              <select name="musictype" onChange={handleMusicTypeInput}>
                 <option value="">None Selected</option>
                 <option value="Guitarist">Guitarist</option>
                 <option value="Bassist">Bassist</option>
@@ -127,4 +126,4 @@ const MatchUser = () => {
   );
 };
 
-export default MatchUser;
+export default MatchUserRole;

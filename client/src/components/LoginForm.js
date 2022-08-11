@@ -9,7 +9,6 @@ const LoginForm = () => {
 
   const accessToken = reactCtx.loginData;
   let content = "";
-  console.log(accessToken);
 
   if (accessToken) {
     content = (

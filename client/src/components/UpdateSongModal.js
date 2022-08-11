@@ -187,7 +187,7 @@ function UpdateSongModal(props) {
                 <div className="col-sm-9"></div>
                 <div className="col-sm-3">
                   <button type="submit" className="btn btn-outline-dark">
-                    Edit
+                    Submit Edit
                   </button>
                 </div>
               </div>
