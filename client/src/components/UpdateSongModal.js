@@ -118,13 +118,13 @@ function UpdateSongModal(props) {
                 <div className="col-sm-3">
                   <label>Enter Title:</label>
                 </div>
-                <div className="col-sm-5">
+                <div className="col-sm-7">
                   <input
                     name="callTitle"
                     type="text"
                     value={callTitle}
                     onChange={handleCallTitleInput}
-                    placeholder="Enter Title of Song to update"
+                    placeholder="Please key in full title of song to update"
                   ></input>
                 </div>
               </div>
@@ -203,22 +203,5 @@ function UpdateSongModal(props) {
     </Modal>
   );
 }
-
-// function App() {
-//   const [modalShow, setModalShow] = React.useState(false);
-
-//   return (
-//     <>
-//       <Button variant="primary" onClick={() => setModalShow(true)}>
-//         Launch vertically centered modal
-//       </Button>
-
-//       <MyVerticallyCenteredModal
-//         show={modalShow}
-//         onHide={() => setModalShow(false)}
-//       />
-//     </>
-//   );
-// }
 
 export default UpdateSongModal;

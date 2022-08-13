@@ -131,7 +131,7 @@ const UpdateLoggedInUserModal = (props) => {
     content = <p>Update Successful!</p>;
   }
   if (error) {
-    content = { error };
+    content = <p>{error}</p>;
   }
 
   if (isLoading) {

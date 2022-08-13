@@ -60,20 +60,20 @@ const MatchUserSongTitle = () => {
         return (
           <li>
             <div className="row">
-              <div className="col-sm-4">User Name:</div>
-              <div className="col-sm-3">{item.username}</div>
+              <div className="col-sm-6">User Name:</div>
+              <div className="col-sm-6">{item.username}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Title:</div>
-              <div className="col-sm-3"> {item.title}</div>
+              <div className="col-sm-6">Title:</div>
+              <div className="col-sm-6"> {item.title}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Location - Optional:</div>
-              <div className="col-sm-3"> {item.location}</div>
+              <div className="col-sm-6">Location - Optional:</div>
+              <div className="col-sm-6"> {item.location}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Contact - Optional:</div>
-              <div className="col-sm-3"> {item.contact}</div>
+              <div className="col-sm-6">Contact - Optional:</div>
+              <div className="col-sm-6"> {item.contact}</div>
             </div>
             <br />
             <br />
@@ -83,7 +83,7 @@ const MatchUserSongTitle = () => {
     }
 
     if (error) {
-      content = { error };
+      content = <p>{error}</p>;
     }
 
     if (isLoading) {
@@ -98,7 +98,7 @@ const MatchUserSongTitle = () => {
       <div className="container matchSearch mt-5">
         <form onSubmit={handleUserMatchTitleSubmit}>
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-6">
               <label>Search User By Song Title:</label>
             </div>
             <div className="col-sm-5">
@@ -109,7 +109,7 @@ const MatchUserSongTitle = () => {
                 placeholder="Enter Song Title or Partial Title"
               />
             </div>
-            <div className="col-sm-2">
+            <div className="col-sm-1">
               <button type="submit" className="btn btn-outline-light">
                 Search
               </button>
@@ -117,7 +117,7 @@ const MatchUserSongTitle = () => {
           </div>
         </form>
       </div>
-      <div className="container mt-5">
+      <div className="container searchResults mt-5">
         <ol>{content}</ol>
       </div>
     </>

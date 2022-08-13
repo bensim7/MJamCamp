@@ -77,6 +77,7 @@ const CreateSongMain = () => {
     event.preventDefault();
     if (validFields) {
       CreateSong();
+      setInputsCheck("");
     } else {
       setInputsCheck("Please fill in all input fields");
     }

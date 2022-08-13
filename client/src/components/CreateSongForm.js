@@ -34,7 +34,7 @@ const CreateSongForm = () => {
 
           <form onSubmit={reactCtx.handleAddSongSubmit}>
             <div className="row mt-3">
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <label>
                   <h5>Enter Song Title</h5>
                 </label>
@@ -51,7 +51,7 @@ const CreateSongForm = () => {
             </div>
 
             <div className="row mt-3">
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <label>
                   <h5>Enter Lyrics</h5>
                 </label>
@@ -69,7 +69,7 @@ const CreateSongForm = () => {
             </div>
 
             <div className="row mt-3">
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <label>
                   <h5>Enter Chords</h5>
                 </label>
@@ -87,7 +87,7 @@ const CreateSongForm = () => {
             </div>
 
             <div className="row mt-3">
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <label>
                   <h5>Select Genre</h5>
                 </label>
@@ -110,7 +110,9 @@ const CreateSongForm = () => {
             </div>
             <div className="row mt-3">
               <div className="col-md-7"></div>
-              <div className="col-md-2"> {reactCtx.inputsCheck}</div>
+              <div className="col-md-2">
+                <h6>{reactCtx.inputsCheck}</h6>
+              </div>
               <div className="col-md-3">
                 <button className="btn btn-success" type="submit">
                   Submit

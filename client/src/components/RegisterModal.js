@@ -47,7 +47,7 @@ function RegisterModal(props) {
       const res = await fetch(url, config);
       if (res.status !== 200) {
         throw new Error(
-          "Something went wrong. Please check if all inputs are filled correctly"
+          "Please check if all inputs are filled correctly. User name may be taken."
         );
       }
 
@@ -59,7 +59,7 @@ function RegisterModal(props) {
     setIsLoading(false);
   };
 
-  console.log(registerData);
+  // console.log(registerData);
 
   //////////////////////////////////////
   // Submit Button
@@ -145,7 +145,7 @@ function RegisterModal(props) {
     content = <p>Registration Successful!</p>;
   }
   if (error) {
-    content = { error };
+    content = <p>{error}</p>;
   }
 
   if (isLoading) {

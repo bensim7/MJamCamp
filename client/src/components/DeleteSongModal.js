@@ -121,7 +121,7 @@ const DeleteSongModal = (props) => {
                     name="title"
                     value={deleteTitleInput}
                     onChange={handleDeleteInput}
-                    placeholder="Choose Song to Delete"
+                    placeholder="Please key in full title of song to delete"
                   />
                 </div>
                 <div className="col-md-1">

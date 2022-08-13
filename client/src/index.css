@@ -131,6 +131,17 @@ header {
   width: 50%;
 }
 
-.logOut {
-  margin-left: 60%;
+/* .logOut {
+  margin-left: 42%;
+} */
+
+.headerAlign {
+  display: flex;
+  /* width: 60%; */
+  justify-content: center;
+}
+
+.searchResults {
+  display: flex;
+  justify-content: center;
 }

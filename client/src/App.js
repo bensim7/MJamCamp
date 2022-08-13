@@ -21,7 +21,10 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [loginData, setLoginData] = useState("");
+  const initialState = localStorage.getItem("loginAccess")
+    ? localStorage.getItem("loginAccess")
+    : "";
+  const [loginData, setLoginData] = useState(initialState);
 
   const fetchLogin = async () => {
     setIsLoading(true);
@@ -51,9 +54,9 @@ function App() {
     setIsLoading(false);
   };
 
-  /////////////////////////////////////////////
-  // Local Storage
-  /////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  // Local Storage (Frontend side in addition to backend jwt token + useContext)
+  ///////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     localStorage.setItem("loginAccess", loginData);
   }, [loginData]);
@@ -63,6 +66,8 @@ function App() {
   ////////////////////////////////////////////
   const logOut = () => {
     localStorage.setItem("loginAccess", "");
+    window.location.href = "/";
+    // window.location.href refreshes redirects the page to login screen so that if logged out is pressed while user is in hidden pages, user does not remain the page
     alert("Logged out");
   };
 
@@ -104,22 +109,23 @@ function App() {
   return (
     <div className="App">
       <header>
-        <div className="container pt-3">
+        <div className="container pt-3 pb-3 headerAlign">
           <div className="row">
             <div className="col-sm-3">
               <h1>MJC</h1>
             </div>
-            <div className="col-sm-3 pt-3">
-              <h5>Music Tracker and User Match</h5>
+            <div className="col-sm-9 pt-2 pb-3">
+              <h5>Song Tracker and User Match</h5>
             </div>
           </div>
         </div>
-        <button className="btn btn-outline-light logOut" onClick={logOut}>
+        {/* <button className="btn btn-outline-light logOut" onClick={logOut}>
           Log Out
-        </button>
-        <NavBar />
+        </button> */}
       </header>
-
+      <ReactContext.Provider value={{ logOut }}>
+        <NavBar />
+      </ReactContext.Provider>
       <main>
         <Routes>
           <Route path="/" element={<Navigate replace to="/Login" />} />
@@ -144,6 +150,7 @@ function App() {
               </ReactContext.Provider>
             }
           />
+          {/* Using RequireLogin to reroute all the below links to login page */}
           <Route element={<RequireLogin />}>
             <Route
               path="/Createsong"
@@ -170,6 +177,7 @@ function App() {
                 </ReactContext.Provider>
               }
             />
+            {/* end of redirect */}
           </Route>
         </Routes>
       </main>

@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactContext from "../context/react.context";
 // import DeleteSong from "./DeleteSong";
-import SearchSongForm from "./SearchSongForm";
 // import UpdateSong from "./UpdateSong";
-import UpdateSongModal from "./UpdateSongModal";
-import Button from "react-bootstrap/Button";
+// import UpdateSongModal from "./UpdateSongModal";
+// import Button from "react-bootstrap/Button";
+import SearchSongForm from "./SearchSongForm";
 
 const ViewSong = () => {
   const reactCtx = useContext(ReactContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [viewSong, setViewSong] = useState([]);
-  const [showSongList, setShowSongList] = useState(false);
-  const [deleteTitleInput, setDeleteTitleInput] = useState("");
-  const [modalShow, setModalShow] = useState(false);
+  // const [deleteTitleInput, setDeleteTitleInput] = useState("");
+  // moved update song modal to SearchSongForm.js
+  // const [modalShow, setModalShow] = useState(false);
+
   const accessToken = reactCtx.loginData;
 
-  //   let content = "";
   const fetchViewSong = async () => {
     setIsLoading(true);
     setError(null);
@@ -53,9 +53,9 @@ const ViewSong = () => {
     fetchViewSong();
   };
 
-  ////////////////////////////////////
-  // Delete Song Fetch API
-  ///////////////////////////////////
+  ////////////////////////////////////////////////////////
+  // Delete Song Fetch API (moved to DeleteSongModal.js)
+  ////////////////////////////////////////////////////////
 
   // const deleteSong = async () => {
   //   setIsLoading(true);
@@ -106,30 +106,34 @@ const ViewSong = () => {
       return (
         <li>
           <div className="row">
-            <div className="col-sm-3">Title: </div>
-            <div className="col-sm-5">{item.title}</div>
+            <div className="col-sm-5">Title: </div>
+            <div className="col-sm-7">{item.title}</div>
           </div>
           <div>
             <div className="row">
-              <div className="col-sm-3">Lyrics: </div>
-              <div className="col-sm-5"> {item.lyrics} </div>
+              <div className="col-sm-5">Lyrics: </div>
+              <div className="col-sm-7"> {item.lyrics} </div>
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-3">Chords: </div>
-            <div className="col-sm-5">{item.chords}</div>
+            <div className="col-sm-5">Chords: </div>
+            <div className="col-sm-7">{item.chords}</div>
           </div>
           <div className="row">
-            <div className="col-sm-3">Genre: </div>
-            <div className="col-sm-5">{item.genre}</div>
+            <div className="col-sm-5">Genre: </div>
+            <div className="col-sm-7">{item.genre}</div>
           </div>
           <div className="row">
-            <div className="col-sm-3">Created On: </div>
-            <div className="col-sm-5">{item.created_on}</div>
+            <div className="col-sm-5">Created On: </div>
+            <div className="col-sm-7">{item.created_on}</div>
           </div>
           <div className="row">
-            <div className="col-sm-3">Email: </div>
-            <div className="col-sm-5">{item.email}</div>
+            <div className="col-sm-5">Updated On: </div>
+            <div className="col-sm-7">{item.updated_on}</div>
+          </div>
+          <div className="row">
+            <div className="col-sm-5">Email: </div>
+            <div className="col-sm-7">{item.email}</div>
           </div>
           <br />
           <br />
@@ -146,28 +150,8 @@ const ViewSong = () => {
     content = <p>Loading .. please wait</p>;
   }
 
-  // if (!viewSong[0]) {
-  //   content = <p>No songs yet, please add some songs!</p>;
-  // }
   return (
     <>
-      {/* <div className="container">
-        <form onSubmit={handleDeleteSubmit}>
-          <input
-            name="deletesong"
-            value={deleteTitleInput}
-            onChange={handleDeleteInput}
-            placeholder="Choose Song to Delete"
-          />
-          <button type="submit" className="btn btn-danger">
-            Delete
-          </button>
-        </form>
-      </div> */}
-      {/* <div className="deleteSong">
-        <DeleteSong />
-      </div> */}
-
       <SearchSongForm />
       <br />
       {/* <Button variant="primary" onClick={() => setModalShow(true)}>

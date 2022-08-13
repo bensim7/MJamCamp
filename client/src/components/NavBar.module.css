@@ -10,7 +10,7 @@
 .navbar {
   height: 5em;
   background-color: var(--purple);
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .navbar nav {
@@ -28,7 +28,7 @@
 }
 
 .navbar li {
-  margin: 6rem;
+  margin: 3rem;
   width: 8rem;
   align-items: center;
 }
@@ -54,6 +54,24 @@
   font-weight: 500;
 }
 
-/* .navbar li:hover {
-  background-color: var(--champagne);
-} */
+@media only screen and (max-width: 770px) {
+  header {
+    display: flex;
+    height: 640px;
+    justify-content: center;
+  }
+
+  .navbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .navbar li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

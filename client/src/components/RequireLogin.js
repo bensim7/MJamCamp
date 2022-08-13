@@ -5,7 +5,7 @@ const RequireLogin = () => {
   const storageLogin = localStorage.getItem("loginAccess");
   const [accessToken, setAccessToken] = useState(storageLogin);
 
-  console.log(accessToken);
+  // console.log(accessToken);
   const location = useLocation();
   return (
     <div>

@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-width: 770px) {
+  .headerAlign {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .headerAlign h1 {
+    font-size: 24px;
+  }
+
+  .headerAlign h5 {
+    font-size: 16px;
+  }
+}

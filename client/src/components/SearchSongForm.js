@@ -64,13 +64,11 @@ const SearchSongForm = () => {
       content = (
         <div className="container">
           <div className="row">
-            <div className="col-md-0"></div>
             <div className="col-md-9">Title: {searchedSongData[0].title}</div>
             <div className="col-md-3"></div>
           </div>
           <br />
           <div className="row">
-            <div className="col-md-0"></div>
             <div className="col-md-9">Lyrics:</div>
             <div className="col-md-3">Chords:</div>
           </div>
@@ -112,7 +110,7 @@ const SearchSongForm = () => {
         <div className="container searchSong">
           <form onSubmit={handleSearchedSongSubmit}>
             <div className="row">
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <label>Search Song:</label>
               </div>
               <div className="col-md-4">
@@ -128,7 +126,7 @@ const SearchSongForm = () => {
                   Search
                 </button>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-1">
                 <Button
                   variant="outline-warning"
                   onClick={() => setModalShowUpdate(true)}
@@ -136,7 +134,7 @@ const SearchSongForm = () => {
                   Edit Song
                 </Button>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-1">
                 <Button
                   variant="outline-danger"
                   onClick={() => setModalShowDelete(true)}

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
+import ReactContext from "../context/react.context";
 
 const NavBar = () => {
+  // Moved NavBar out of App.js header to below App.js header.
+  // Log out button moved from App.js header to NavBar via useContext for better mobile screen display through Media Query
+  const reactCtx = useContext(ReactContext);
   return (
     <header className={styles.navbar}>
       <nav class>
@@ -39,6 +43,14 @@ const NavBar = () => {
             >
               User Match
             </NavLink>
+          </li>
+          <li>
+            <button
+              className="btn btn-outline-light logOut"
+              onClick={reactCtx.logOut}
+            >
+              Log Out
+            </button>
           </li>
         </ul>
       </nav>

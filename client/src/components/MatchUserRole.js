@@ -60,20 +60,20 @@ const MatchUserRole = () => {
         return (
           <li>
             <div className="row">
-              <div className="col-sm-4">User Name:</div>{" "}
-              <div className="col-sm-3">{item.username}</div>
+              <div className="col-sm-6">User Name:</div>
+              <div className="col-sm-6">{item.username}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Role:</div>{" "}
-              <div className="col-sm-3"> {item.musictype}</div>
+              <div className="col-sm-6">Role:</div>
+              <div className="col-sm-6"> {item.musictype}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Location - Optional:</div>
-              <div className="col-sm-3"> {item.location}</div>
+              <div className="col-sm-6">Location - Optional:</div>
+              <div className="col-sm-6"> {item.location}</div>
             </div>
             <div className="row">
-              <div className="col-sm-4">Contact - Optional:</div>
-              <div className="col-sm-3"> {item.contact}</div>
+              <div className="col-sm-6">Contact - Optional:</div>
+              <div className="col-sm-6"> {item.contact}</div>
             </div>
             <br />
             <br />
@@ -83,7 +83,7 @@ const MatchUserRole = () => {
     }
 
     if (error) {
-      content = { error };
+      content = <p>{error}</p>;
     }
 
     if (isLoading) {
@@ -97,7 +97,7 @@ const MatchUserRole = () => {
       <div className="container matchSearch mt-5">
         <form onSubmit={handleUserMatchSubmit}>
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-6">
               <label>Search User By Role Entered:</label>
             </div>
             <div className="col-sm-2">
@@ -119,7 +119,7 @@ const MatchUserRole = () => {
           </div>
         </form>
       </div>
-      <div className="container mt-5">
+      <div className="container searchResults mt-5">
         <ol>{content}</ol>
       </div>
     </>
