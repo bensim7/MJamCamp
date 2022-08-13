@@ -120,39 +120,6 @@ const CreateSongMain = () => {
       >
         <CreateSongForm />
       </ReactContext.Provider>
-      {/* <form onSubmit={handleAddSongSubmit}>
-        <label>
-          <h5>Enter Song Title</h5>
-        </label>
-        <input
-          name="title"
-          value={titleInput}
-          onChange={handleTitleInput}
-          type="text"
-          placeholder="Enter Song Title"
-        ></input>
-        <label>
-          <h5>Enter Lyrics</h5>
-        </label>
-        <input
-          name="title"
-          value={lyricsInput}
-          onChange={handleLyricsInput}
-          type="text"
-          placeholder="Enter Lyrics"
-        ></input>
-        <label>
-          <h5>Enter Chords</h5>
-        </label>
-        <input
-          name="chords"
-          value={chordsInput}
-          onChange={handleChordsInput}
-          type="text"
-          placeholder="Enter Chords"
-        ></input>
-        <button type="submit">submit</button>
-      </form> */}
     </div>
   );
 };

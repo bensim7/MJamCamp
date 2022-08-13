@@ -99,7 +99,7 @@ const SearchSongForm = () => {
     }
 
     if (isLoading) {
-      content = <p>Loading .. please wait</p>;
+      content = <p>Loading .. Please Wait</p>;
     }
   } else {
     content = <p>Search Song: Not Authorized</p>;

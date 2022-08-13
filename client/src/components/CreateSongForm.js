@@ -19,7 +19,7 @@ const CreateSongForm = () => {
     }
 
     if (reactCtx.isLoading) {
-      content = <p>Loading .. please wait</p>;
+      content = <p>Loading .. Please Wait</p>;
     }
   } else {
     content = <p>Create/Add Song: Not Authorized</p>;

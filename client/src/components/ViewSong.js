@@ -147,7 +147,7 @@ const ViewSong = () => {
   }
 
   if (isLoading) {
-    content = <p>Loading .. please wait</p>;
+    content = <p>Loading .. Please Wait</p>;
   }
 
   return (

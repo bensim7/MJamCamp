@@ -23,7 +23,7 @@ const LoginForm = () => {
   }
 
   if (reactCtx.isLoading) {
-    content = <p>Logging in .. please wait</p>;
+    content = <p>Loading .. Please Wait</p>;
   }
   return (
     <>

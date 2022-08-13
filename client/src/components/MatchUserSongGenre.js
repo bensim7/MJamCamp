@@ -87,7 +87,7 @@ const MatchUserSongGenre = () => {
     }
 
     if (isLoading) {
-      content = <p>Loading .. Please wait</p>;
+      content = <p>Loading .. Please Wait</p>;
     }
   } else {
     content = <p>Search Not Authorized</p>;

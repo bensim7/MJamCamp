@@ -94,7 +94,7 @@ const ViewUser = () => {
   }
 
   if (isLoading) {
-    content = <p>Data is loading .. please wait</p>;
+    content = <p>Loading .. Please Wait</p>;
   }
 
   return (

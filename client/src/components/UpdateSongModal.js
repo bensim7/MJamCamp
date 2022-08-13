@@ -78,11 +78,11 @@ function UpdateSongModal(props) {
   let content = "";
   if (accessToken) {
     if (updatedSongData.rowCount === 1) {
-      content = <p>Song is Updated</p>;
+      content = <p>Song Is Updated</p>;
     }
 
     if (updatedSongData.rowCount === 0) {
-      content = <p>Wrong Input or No input</p>;
+      content = <p>Wrong Input Or No Input</p>;
     }
 
     if (error) {

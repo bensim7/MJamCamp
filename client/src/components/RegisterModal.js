@@ -149,7 +149,7 @@ function RegisterModal(props) {
   }
 
   if (isLoading) {
-    content = <p>Loading .. Please wait</p>;
+    content = <p>Loading .. Please Wait</p>;
   }
   return (
     <Modal

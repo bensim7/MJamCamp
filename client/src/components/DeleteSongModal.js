@@ -12,6 +12,7 @@ const DeleteSongModal = (props) => {
   const [deleteSuccessFetched, setDeleteSuccessFetched] = useState("");
 
   const accessToken = reactCtx.loginData;
+
   ////////////////////////////////////
   // Delete Song Fetch API
   ///////////////////////////////////
@@ -88,7 +89,7 @@ const DeleteSongModal = (props) => {
     }
 
     if (isLoading) {
-      content = <p>Loading .. please wait</p>;
+      content = <p>Loading .. Please Wait</p>;
     }
   } else {
     content = <p>Delete Song: Not Authorized</p>;
