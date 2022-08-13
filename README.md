@@ -49,6 +49,6 @@ eg. Bootstrap Modals, Buttons, Bootstrap Grids
 
 ![SearchUserSongGenre](/README_img/SearchUserSongGenre.jpg)
 
-![SearchUserSongLyrics](/README_img/SearchUserSongGenre.jpg)
+![SearchUserSongLyrics](/README_img/SearchUserSongLyrics.jpg)
 
 ![SearchUserSongTitle](/README_img/SearchUserSongTitle.jpg)
