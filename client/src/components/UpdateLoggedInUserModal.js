@@ -6,10 +6,9 @@ import ReactContext from "../context/react.context";
 const UpdateLoggedInUserModal = (props) => {
   const reactCtx = useContext(ReactContext);
 
-  const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [password1Input, setPassword1Input] = useState("");
-  const [userNameInput, setUserNameInput] = useState("");
+  const [userNameInput, setUserNameInput] = useState();
   const [musicTypeInput, setMusicTypeInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
   const [contactInput, setContactInput] = useState("");
@@ -25,6 +24,7 @@ const UpdateLoggedInUserModal = (props) => {
   // Update User
   /////////////////////////////////////////
 
+  console.log(userNameInput);
   const updateUserToDb = async () => {
     setIsLoading(true);
     setError(null);
@@ -167,7 +167,7 @@ const UpdateLoggedInUserModal = (props) => {
                     value={userNameInput}
                     onChange={handleUserNameInput}
                     type="text"
-                    placeholder="Enter Name Here"
+                    placeholder="Enter User Name Here"
                   />
                 </div>
               </div>
@@ -231,7 +231,7 @@ const UpdateLoggedInUserModal = (props) => {
                 <div className="col-sm-3">
                   <label>Optional Contact Info : </label>
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-8">
                   <input
                     name="contact"
                     value={contactInput}
@@ -241,6 +241,7 @@ const UpdateLoggedInUserModal = (props) => {
                   />
                 </div>
               </div>
+              <br />
               <div className="row">
                 <div className="col-sm-3">
                   <label>Optional Location: </label>

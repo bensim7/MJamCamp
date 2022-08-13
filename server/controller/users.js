@@ -83,7 +83,7 @@ router.post(
       );
       res.json(response);
     } catch (error) {
-      console.log("POST /users/login " + error);
+      console.log("POST /login", error);
       res.status(400).json({ status: "error", message: "Login failed" });
     }
   }
@@ -118,8 +118,12 @@ router.post(
         "SELECT * FROM users WHERE email = $1",
         [email]
       );
-      console.log(existingUser.rows); // find if user exists or password inputs match
+      // console.log(existingUser.rows);
+      // find if user exists or password inputs match
       if (existingUser.rows.length !== 0 || password !== password1) {
+        console.log(
+          "Error: Email address is already used or password inputs do not match"
+        );
         return res.status(400).json({
           status: "error",
           message:
@@ -135,7 +139,7 @@ router.post(
 
       res.json(newUser.rows);
     } catch (error) {
-      console.log("POST /createuser ", error);
+      console.log("POST /createuser", error);
       res
         .status(400)
         .json({ status: "error", message: "An error has occured" });
@@ -148,18 +152,18 @@ router.post(
 // Uncomment below to seed users without hashed password for developer use
 //////////////////////////////////////////////////////////////////////////////////
 
-router.post("/seedusers", auth, async (req, res) => {
-  try {
-    const seedUsers = await pool.query(
-      "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
-    );
+// router.post("/seedusers", auth, async (req, res) => {
+//   try {
+//     const seedUsers = await pool.query(
+//       "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
+//     );
 
-    res.json(seedUsers.rows);
-  } catch (error) {
-    console.log("POST /seedusers ", error);
-    res.status(400).json({ status: "error", message: "An error has occured" });
-  }
-});
+//     res.json(seedUsers.rows);
+//   } catch (error) {
+//     console.log("POST /seedusers ", error);
+//     res.status(400).json({ status: "error", message: "An error has occured" });
+//   }
+// });
 
 // Get all users
 router.get("/allusers", auth, async (req, res) => {
@@ -176,15 +180,6 @@ router.get("/allusers", auth, async (req, res) => {
 router.get("/getuser", auth, async (req, res) => {
   try {
     const loggedInUser = req.decoded.id;
-    // const getUser = await pool.query(
-    //   "SELECT IFNULL((SELECT * FROM users WHERE username = $1, $2), 'not found') ",
-    //   [username]
-    // );
-    // const { nullsoerror } = "not found";
-    // const getUser = await pool.query(
-    //   "SELECT IFNULL((SELECT * FROM users WHERE username = $1), '$2') ",
-    //   [username, nullsoerror]
-    // );
 
     const getUser = await pool.query("SELECT * FROM users WHERE user_id = $1", [
       loggedInUser,
@@ -224,7 +219,7 @@ router.put(
       );
       res.json(updateUser.command);
     } catch (error) {
-      console.log("PUT /updateuser ", error);
+      console.log("PUT /updateuser", error);
       res
         .status(400)
         .json({ status: "error", message: "An error has occurred" });
@@ -242,7 +237,7 @@ router.delete("/deleteuser", auth, async (req, res) => {
       );
       res.json(deleteUser.command);
     } catch (error) {
-      console.log(error.message);
+      console.log("DELETE /deleteuser", error);
       res
         .status(400)
         .json({ status: "error", message: "An error has occured" });
@@ -269,7 +264,7 @@ router.post("/getuserbyrole", auth, async (req, res) => {
 
     res.json(getUserByRole.rows);
   } catch (error) {
-    console.log(error.message);
+    console.log("POST /getuserbyrole", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
@@ -286,7 +281,7 @@ router.post("/getuserbysonggenre", auth, async (req, res) => {
     );
     res.json(getUserBySongGenre.rows);
   } catch (error) {
-    console.log(error.message);
+    console.log("POST /getuserbysonggenre", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
@@ -305,7 +300,7 @@ router.post("/getuserbysonglyrics", auth, async (req, res) => {
       res.json(getUserBySongLyrics.rows);
     }
   } catch (error) {
-    console.log(error.message);
+    console.log("POST /getuserbysonglyrics", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
@@ -324,7 +319,7 @@ router.post("/getuserbysongtitle", auth, async (req, res) => {
       res.json(getUserBySongTitle.rows);
     }
   } catch (error) {
-    console.log(error.message);
+    console.log("POST /getuserbysongtitle", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });

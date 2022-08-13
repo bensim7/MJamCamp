@@ -17,9 +17,9 @@ router.get("/testing", auth, async (req, res) => {
 
 // Create a song
 router.post("/addsong", auth, async (req, res) => {
-  console.log(`accessing /POST addsong`);
-  console.log(req.decoded);
-  console.log(req.body);
+  // console.log(`accessing /POST addsong`);
+  // console.log(req.decoded);
+  // console.log(req.body);
   try {
     const { title, lyrics, chords, genre } = req.body;
     const userEmail = req.decoded.email;
@@ -34,7 +34,7 @@ router.post("/addsong", auth, async (req, res) => {
       return res.status(400).json({
         status: "error",
         message: "Duplicate title, please enter a different title",
-        rows: existingTitle.rows,
+        title: existingTitle.rows,
       });
     }
 
@@ -46,7 +46,7 @@ router.post("/addsong", auth, async (req, res) => {
 
     res.json(newSong);
   } catch (error) {
-    console.log(error);
+    console.log("GET /addsong", error);
     res.status(400).json({ status: "error", message: "An error occurred" });
   }
 });
@@ -56,18 +56,18 @@ router.post("/addsong", auth, async (req, res) => {
 // Uncomment below to seed songs for developer use
 ////////////////////////////////////////////////////////
 
-router.post("/seedsongs", auth, async (req, res) => {
-  try {
-    const seedSongs = await pool.query(
-      "INSERT INTO songs (title, lyrics, chords, genre, email) VALUES('Apple Fruit', 'awesome random lyrics test', 'Verse: Am C F G', 'Classic Rock', 'tester1@gmail.com'), ('Best Day To Cycle', 'best random lyrics test', 'Verse: Am C F G', 'Indie', 'tester1@gmail.com'), ('Climb and Clam', 'climb random lyrics test', 'Verse: Am C F G', 'Indie', 'tester2@gmail.com'), ('Dive and Damp', 'dive random lyrics test', 'Verse: Am C F G', 'Classic Rock', 'tester2@gmail.com'), ('Excellent Experiment', 'experiment random lyrics test', 'Verse: Am C F G', 'Alternative Rock', 'tester3@gmail.com'), ('Fast Flying', 'fast random lyrics test', 'Verse: Am C F G', 'Grunge', 'tester3@gmail.com'), ('Grandpa', 'grand random lyrics test', 'Verse: Am C F G', 'Grunge', 'tester5@gmail.com'), ('High Gravel', 'high random lyrics test', 'Verse: Am C F G', 'Pop', 'tester4@gmail.com'), ('Isometric', 'isometric random lyrics test', 'Verse: Am C F G', 'Pop', 'tester6@gmail.com')"
-    );
+// router.post("/seedsongs", auth, async (req, res) => {
+//   try {
+//     const seedSongs = await pool.query(
+//       "INSERT INTO songs (title, lyrics, chords, genre, email) VALUES('Apple Fruit', 'awesome random lyrics test', 'Verse: Am C F G', 'Classic Rock', 'tester1@gmail.com'), ('Best Day To Cycle', 'best random lyrics test', 'Verse: Am C F G', 'Indie', 'tester1@gmail.com'), ('Climb and Clam', 'climb random lyrics test', 'Verse: Am C F G', 'Indie', 'tester2@gmail.com'), ('Dive and Damp', 'dive random lyrics test', 'Verse: Am C F G', 'Classic Rock', 'tester2@gmail.com'), ('Excellent Experiment', 'experiment random lyrics test', 'Verse: Am C F G', 'Alternative Rock', 'tester3@gmail.com'), ('Fast Flying', 'fast random lyrics test', 'Verse: Am C F G', 'Grunge', 'tester3@gmail.com'), ('Grandpa', 'grand random lyrics test', 'Verse: Am C F G', 'Grunge', 'tester5@gmail.com'), ('High Gravel', 'high random lyrics test', 'Verse: Am C F G', 'Pop', 'tester4@gmail.com'), ('Isometric', 'isometric random lyrics test', 'Verse: Am C F G', 'Pop', 'tester6@gmail.com')"
+//     );
 
-    res.json(seedSongs);
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ status: "error", message: "An error occurred" });
-  }
-});
+//     res.json(seedSongs);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ status: "error", message: "An error occurred" });
+//   }
+// });
 
 // View all songs
 router.get("/allsongs", auth, async (req, res) => {
@@ -78,15 +78,15 @@ router.get("/allsongs", auth, async (req, res) => {
     );
     res.json(allSongs.rows);
   } catch (error) {
-    console.log("GET /allsongs ", error);
+    console.log("GET /allsongs", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
 
 // View one song
 router.post("/getsong", auth, async (req, res) => {
-  console.log("view one song");
-  console.log(req.body);
+  // console.log("view one song");
+  // console.log(req.body);
   try {
     const userEmail = req.decoded.email;
     const { title } = req.body;
@@ -103,7 +103,7 @@ router.post("/getsong", auth, async (req, res) => {
         .json({ status: "error", message: "Please key in an input." });
     }
   } catch (error) {
-    console.log("GET /getsong ", error);
+    console.log("GET /getsong", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
@@ -119,7 +119,7 @@ router.put("/updatesong", auth, async (req, res) => {
     );
     res.json(updateSong);
   } catch (error) {
-    console.log("PUT /updatesong ", error);
+    console.log("PUT /updatesong", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
@@ -136,7 +136,7 @@ router.delete("/deletesong", auth, async (req, res) => {
     );
     res.json(deleteSong);
   } catch (error) {
-    console.log("DELETE /deletesong ", error);
+    console.log("DELETE /deletesong", error);
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
