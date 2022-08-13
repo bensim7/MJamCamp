@@ -12,7 +12,7 @@ CREATE TABLE users (
   contact VARCHAR (50),
   isadmin BOOLEAN DEFAULT FALSE,
   Matches VARCHAR [],
-  Messages Text [],
+  Messages TEXT [],
   created_on TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
   last_login TIMESTAMP WITH TIME ZONE
 );
