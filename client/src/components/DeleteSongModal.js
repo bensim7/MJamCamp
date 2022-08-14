@@ -58,7 +58,7 @@ const DeleteSongModal = (props) => {
     // }
   };
 
-  console.log(deleteSuccessFetched.rowCount);
+  // console.log(deleteSuccessFetched.rowCount);
 
   ////////////////////////
   // Delete Submit
@@ -66,8 +66,8 @@ const DeleteSongModal = (props) => {
   const handleDeleteSubmit = (event) => {
     event.preventDefault();
     deleteSong();
-    console.log("this is the delete input");
-    console.log(deleteTitleInput);
+    // console.log("this is the delete input");
+    // console.log(deleteTitleInput);
     setDeleteTitleInput("");
   };
 

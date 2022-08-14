@@ -78,13 +78,13 @@ const SearchSongForm = () => {
           </div>
           <br />
           <div className="row">
-            <div className="col-md-3">
-              Genre: {searchedSongData[0].genretag}
-            </div>
+            <div className="col-md-3">Genre: {searchedSongData[0].genre}</div>
             <div className="col-md-3">
               Created On: {searchedSongData[0].created_on}
             </div>
-            <div className="col-md-3">Email: {searchedSongData[0].email}</div>
+            <div className="col-md-3">
+              Updated On: {searchedSongData[0].updated_on}
+            </div>
           </div>
         </div>
       );

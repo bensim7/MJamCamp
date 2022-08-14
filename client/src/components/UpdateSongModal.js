@@ -52,7 +52,7 @@ function UpdateSongModal(props) {
     setIsLoading(false);
   };
 
-  console.log(updatedSongData);
+  // console.log(updatedSongData);
 
   const handleUpdateSongSubmit = (event) => {
     event.preventDefault();
