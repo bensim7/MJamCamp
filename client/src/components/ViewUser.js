@@ -77,12 +77,12 @@ const ViewUser = () => {
 
         <div className="row">
           <div className="col-sm-2"></div>
-          <div className="col-sm-3">Account created:</div>
+          <div className="col-sm-3">Account Created On:</div>
           <div className="col-sm-2">{viewData.created_on}</div>
         </div>
         <div className="row">
           <div className="col-sm-2"></div>
-          <div className="col-sm-3">Last Login:</div>
+          <div className="col-sm-3">Last Login On:</div>
           <div className="col-sm-2">{viewData.last_login}</div>
         </div>
       </div>
