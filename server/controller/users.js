@@ -152,18 +152,18 @@ router.post(
 // Uncomment below to seed users without hashed password for developer use
 //////////////////////////////////////////////////////////////////////////////////
 
-// router.post("/seedusers", auth, async (req, res) => {
-//   try {
-//     const seedUsers = await pool.query(
-//       "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
-//     );
+router.post("/seedusers", auth, async (req, res) => {
+  try {
+    const seedUsers = await pool.query(
+      "INSERT INTO users (username, password, email, contact, musictype, location) VALUES('Tester1', 'helloworld12', 'tester1@gmail.com', 'tester1.socialmediapage.com', 'Guitarist', 'North'), ('Tester2','helloworld12', 'tester2@gmail.com', 'tester2.socialmediapage2.com', 'Keyboardist', 'South'), ('Tester3', 'helloworld12', 'tester3@gmail.com', 'tester3.socialmediapage3.com', 'Drummer', 'East'), ('Tester4', 'helloworld12', 'tester4@gmail.com', 'tester4.socialmediapage4', 'Bassist', 'West'), ('Tester5', 'helloworld12', 'tester5@gmail.com', 'tester5.socialmediapage5.com', 'Vocalist', 'Central'), ('Tester6', 'helloworld12', 'tester6@gmail.com', 'tester6.socialmediapage6.com', 'Wind Instruments', 'Central') RETURNING *"
+    );
 
-//     res.json(seedUsers.rows);
-//   } catch (error) {
-//     console.log("POST /seedusers ", error);
-//     res.status(400).json({ status: "error", message: "An error has occured" });
-//   }
-// });
+    res.json(seedUsers.rows);
+  } catch (error) {
+    console.log("POST /seedusers ", error);
+    res.status(400).json({ status: "error", message: "An error has occured" });
+  }
+});
 
 // Get all users
 router.get("/allusers", auth, async (req, res) => {
@@ -295,7 +295,8 @@ router.post("/getuserbysonglyrics", auth, async (req, res) => {
     const { lyrics } = req.body;
     if (lyrics !== "") {
       const getUserBySongLyrics = await pool.query(
-        `SELECT username, musictype, location, contact, title FROM users INNER JOIN songs ON users.email = songs.email WHERE lyrics LIKE '%${lyrics}%'`
+        // `SELECT username, musictype, location, contact, title, array_to_string(lyrics, ',') FROM users INNER JOIN songs ON users.email = songs.email WHERE array_to_string(lyrics, ',') LIKE '%${lyrics}%'`
+        `SELECT username, musictype, location, contact, title FROM users INNER JOIN songs ON users.email = songs.email WHERE array_to_string(lyrics, ',') LIKE '%${lyrics}%'`
       );
       res.json(getUserBySongLyrics.rows);
     }

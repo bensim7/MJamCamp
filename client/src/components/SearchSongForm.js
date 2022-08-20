@@ -73,7 +73,11 @@ const SearchSongForm = () => {
             <div className="col-md-3">Chords:</div>
           </div>
           <div className="row">
-            <div className="col-md-9">{searchedSongData[0].lyrics}</div>
+            <div className="col-md-9">
+              {searchedSongData[0].lyrics.map((lyric) => (
+                <p>{lyric}</p>
+              ))}
+            </div>
             <div className="col-md-3">{searchedSongData[0].chords}</div>
           </div>
           <br />

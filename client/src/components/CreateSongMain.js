@@ -2,10 +2,20 @@ import React, { useState, useContext, useEffect } from "react";
 import ReactContext from "../context/react.context";
 import CreateSongForm from "./CreateSongForm";
 
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const mic = new SpeechRecognition();
+
+mic.continuous = true;
+mic.interimResults = true;
+mic.lang = "en-SG";
+
 const CreateSongMain = () => {
   const reactCtx = useContext(ReactContext);
   const [titleInput, setTitleInput] = useState("");
-  const [lyricsInput, setLyricsInput] = useState("");
+  const [lyricsTextInput, setLyricsTextInput] = useState("");
+  const [savedLyrics, setSavedLyrics] = useState([]);
   const [chordsInput, setChordsInput] = useState("");
   const [genreInput, setGenreInput] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +25,68 @@ const CreateSongMain = () => {
   const [inputsCheck, setInputsCheck] = useState("");
   // const [viewSong, setViewSong] = useState([]);
   const accessToken = reactCtx.loginData;
+
+  const handleSaveLyrics = () => {
+    setSavedLyrics([...savedLyrics, lyricsTextInput]);
+    setLyricsTextInput("");
+  };
+
+  //////////////////////////////////////////////////////
+  // Speech to Text
+  //////////////////////////////////////////////////////
+  const [isListening, setIsListening] = useState(false);
+  const [speechLyric, setSpeechLyric] = useState(null);
+
+  useEffect(() => {
+    handleListen();
+  }, [isListening]);
+
+  const handleStartStopToggle = () => {
+    setIsListening((prevState) => !prevState);
+  };
+
+  const handleListen = () => {
+    if (isListening) {
+      mic.start(); // part of voice API
+      mic.onend = () => {
+        console.log("continue ...");
+        mic.start();
+      };
+    } else {
+      mic.stop();
+      mic.onend = () => {
+        console.log("Stopped Mic on Click");
+      };
+    }
+    mic.onstart = () => {
+      console.log("Mic is on");
+    };
+
+    mic.onresult = (event) => {
+      // make an array from event.results, map the array of results, take first row of array and map that to form transcript and join back into string
+      const transcript = Array.from(event.results)
+        .map((result) => result[0])
+        .map((result) => result.transcript)
+        .join("");
+
+      console.log(transcript);
+      setSpeechLyric(transcript);
+      mic.onerror = (event) => {
+        console.log(event.error);
+      };
+    };
+  };
+
+  const handleSaveSpeechLyric = () => {
+    setSavedLyrics([...savedLyrics, speechLyric]);
+    setSpeechLyric("");
+  };
+
+  const handleSpeechLyricManual = (event) => {
+    setSpeechLyric(event.target.value);
+  };
+
+  console.log(savedLyrics);
 
   /////////////////////////////////
   // Add Song
@@ -26,7 +98,7 @@ const CreateSongMain = () => {
 
     const body = {
       title: titleInput,
-      lyrics: lyricsInput,
+      lyrics: savedLyrics,
       chords: chordsInput,
       genre: genreInput,
     };
@@ -60,18 +132,13 @@ const CreateSongMain = () => {
 
   console.log(addedSong);
 
-  ///////////////////////////////
+  ///////////////////////////////////
   // Create Add Song Submit Function
-  ///////////////////////////////
+  ///////////////////////////////////
 
   useEffect(() => {
-    setValidFields(
-      titleInput !== "" &&
-        lyricsInput !== "" &&
-        chordsInput !== "" &&
-        genreInput !== ""
-    );
-  }, [titleInput, lyricsInput, chordsInput, genreInput]);
+    setValidFields(titleInput !== "" && savedLyrics[0] && genreInput !== "");
+  }, [titleInput, savedLyrics, chordsInput, genreInput]);
 
   const handleAddSongSubmit = (event) => {
     event.preventDefault();
@@ -79,15 +146,18 @@ const CreateSongMain = () => {
       CreateSong();
       setInputsCheck("");
     } else {
-      setInputsCheck("Please fill in all input fields");
+      setInputsCheck("Please fill all required fields marked with *");
     }
   };
+
+  //////////////////////////////////////////
+
   const handleTitleInput = (event) => {
     setTitleInput(event.target.value);
   };
 
-  const handleLyricsInput = (event) => {
-    setLyricsInput(event.target.value);
+  const handleLyricsTextInput = (event) => {
+    setLyricsTextInput(event.target.value);
   };
 
   const handleChordsInput = (event) => {
@@ -103,12 +173,12 @@ const CreateSongMain = () => {
       <ReactContext.Provider
         value={{
           titleInput,
-          lyricsInput,
+          lyricsTextInput,
           chordsInput,
           genreInput,
           handleAddSongSubmit,
           handleTitleInput,
-          handleLyricsInput,
+          handleLyricsTextInput,
           handleChordsInput,
           handleGenreInput,
           isLoading,
@@ -116,6 +186,13 @@ const CreateSongMain = () => {
           addedSong,
           accessToken,
           inputsCheck,
+          handleSaveLyrics,
+          savedLyrics,
+          isListening,
+          speechLyric,
+          handleStartStopToggle,
+          handleSaveSpeechLyric,
+          handleSpeechLyricManual,
         }}
       >
         <CreateSongForm />

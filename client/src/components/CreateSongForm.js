@@ -36,7 +36,7 @@ const CreateSongForm = () => {
             <div className="row mt-3">
               <div className="col-md-5">
                 <label>
-                  <h5>Enter Song Title</h5>
+                  <h5>*Enter Song Title</h5>
                 </label>
               </div>
               <div className="col-md-5">
@@ -58,16 +58,79 @@ const CreateSongForm = () => {
               </div>
               <div className="col-md-5">
                 <textarea
-                  rows="18"
+                  rows="8"
                   cols="70"
                   name="lyrics"
-                  value={reactCtx.lyricsInput}
-                  onChange={reactCtx.handleLyricsInput}
-                  placeholder="Enter Lyrics Here"
+                  value={reactCtx.lyricsTextInput}
+                  onChange={reactCtx.handleLyricsTextInput}
+                  placeholder="Enter each paragraph/line of lyrics and save"
                 ></textarea>
+                <button
+                  className="btn btn-success"
+                  type="button"
+                  onClick={reactCtx.handleSaveLyrics}
+                  disabled={!reactCtx.lyricsTextInput}
+                >
+                  Save Lyrics
+                </button>
               </div>
             </div>
-
+            <div className="row mt-3">
+              <div className="col-md-5">
+                <label>
+                  <h5>Speech to Text</h5>
+                </label>
+              </div>
+              <div className="col-md-2">
+                {reactCtx.isListening ? (
+                  <span>Mic On </span>
+                ) : (
+                  <span>Mic Off </span>
+                )}
+                <button
+                  className="btn btn-dark"
+                  type="button"
+                  onClick={reactCtx.handleStartStopToggle}
+                >
+                  Start/Stop
+                </button>
+              </div>
+              <div className="col-md-2">
+                <button
+                  className="btn btn-success"
+                  type="button"
+                  onClick={reactCtx.handleSaveSpeechLyric}
+                  disabled={!reactCtx.speechLyric}
+                >
+                  Save Speech To Lyrics
+                </button>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-5">
+                <h5>Display:</h5>
+              </div>
+              <div className="col-md-5">
+                <textarea
+                  rows="8"
+                  cols="70"
+                  value={reactCtx.speechLyric}
+                  onChange={reactCtx.handleSpeechLyricManual}
+                />
+              </div>
+            </div>
+            <div className="row mt-3">
+              <div className="col-md-5">
+                <label>
+                  <h5>*Saved Lyrics</h5>
+                </label>
+              </div>
+              <div className="col-md-5 boxContain">
+                {reactCtx.savedLyrics.map((lyric) => (
+                  <p>{lyric}</p>
+                ))}
+              </div>
+            </div>
             <div className="row mt-3">
               <div className="col-md-5">
                 <label>
@@ -89,7 +152,7 @@ const CreateSongForm = () => {
             <div className="row mt-3">
               <div className="col-md-5">
                 <label>
-                  <h5>Select Genre</h5>
+                  <h5>*Select Genre</h5>
                 </label>
               </div>
               <div className="col-md-5">

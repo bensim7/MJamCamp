@@ -22,7 +22,7 @@ CREATE TABLE songs (
   song_id serial,
   email VARCHAR(255) REFERENCES users(email),
   title VARCHAR (50) UNIQUE NOT NULL PRIMARY KEY,
-  lyrics TEXT NOT NULL,
+  lyrics TEXT [] NOT NULL,
   chords TEXT,
   genre TEXT,
   created_on TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,

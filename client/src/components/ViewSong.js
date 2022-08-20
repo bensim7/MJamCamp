@@ -112,7 +112,11 @@ const ViewSong = () => {
           <div>
             <div className="row">
               <div className="col-sm-5">Lyrics: </div>
-              <div className="col-sm-7"> {item.lyrics} </div>
+              <div className="col-sm-7">
+                {item.lyrics.map((lyric) => (
+                  <p>{lyric}</p>
+                ))}
+              </div>
             </div>
           </div>
           <div className="row">

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactContext from "../context/react.context";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -7,13 +7,21 @@ function UpdateSongModal(props) {
   const reactCtx = useContext(ReactContext);
   const [callTitle, setCallTitle] = useState("");
   const [updateLyrics, setUpdateLyrics] = useState("");
+  const [savedLyrics, setSavedLyrics] = useState([]);
   const [updateChords, setUpdateChords] = useState("");
   const [updateGenre, setUpdateGenre] = useState("");
   const [isLoading, setIsLoading] = useState("");
   const [error, setError] = useState(false);
   const [updatedSongData, setUpdatedSongData] = useState("");
+  const [validFields, setValidFields] = useState(false);
+  const [inputsCheck, setInputsCheck] = useState("");
 
   const accessToken = reactCtx.loginData;
+
+  const handleSaveLyrics = () => {
+    setSavedLyrics([...savedLyrics, updateLyrics]);
+    setUpdateLyrics("");
+  };
 
   const UpdateForSong = async () => {
     setIsLoading(true);
@@ -21,7 +29,7 @@ function UpdateSongModal(props) {
 
     const body = {
       title: callTitle,
-      lyrics: updateLyrics,
+      lyrics: savedLyrics,
       chords: updateChords,
       genre: updateGenre,
     };
@@ -52,11 +60,23 @@ function UpdateSongModal(props) {
     setIsLoading(false);
   };
 
-  // console.log(updatedSongData);
+  console.log(updatedSongData);
+
+  /////////////////////////////////////////////
+  // Submit Update Song
+  ////////////////////////////////////////////
+  useEffect(() => {
+    setValidFields(callTitle !== "" && savedLyrics[0] && updateGenre !== "");
+  }, [callTitle, savedLyrics, updateChords, updateGenre]);
 
   const handleUpdateSongSubmit = (event) => {
     event.preventDefault();
-    UpdateForSong();
+    if (validFields) {
+      UpdateForSong();
+      setInputsCheck("");
+    } else {
+      setInputsCheck("Please fill all required fields marked with *");
+    }
   };
 
   const handleCallTitleInput = (event) => {
@@ -116,7 +136,7 @@ function UpdateSongModal(props) {
             <form onSubmit={handleUpdateSongSubmit}>
               <div className="row">
                 <div className="col-sm-3">
-                  <label>Enter Title:</label>
+                  <label>*Enter Title:</label>
                 </div>
                 <div className="col-sm-7">
                   <input
@@ -140,11 +160,30 @@ function UpdateSongModal(props) {
                   cols="82"
                   value={updateLyrics}
                   onChange={handleUpdateLyricsInput}
-                  placeholder="Update Lyrics Here"
+                  placeholder="Enter each paragraph/line of lyrics and save"
                 ></textarea>
               </div>
+              <button
+                type="button"
+                onClick={handleSaveLyrics}
+                disabled={!updateLyrics}
+              >
+                Save Updated Lyrics
+              </button>
+              <br />
               <br />
               <div>
+                <div>
+                  <label>
+                    <h5>*Saved Lyrics</h5>
+                  </label>
+                </div>
+                <div className="boxContain">
+                  {savedLyrics.map((lyric) => (
+                    <p>{lyric}</p>
+                  ))}
+                </div>
+
                 <label>Update Chords:</label>
               </div>
               <div>
@@ -160,7 +199,7 @@ function UpdateSongModal(props) {
               <br />
               <div className="row">
                 <div className="col-sm-3">
-                  <label>Update Genre:</label>
+                  <label>*Update Genre:</label>
                 </div>
                 <div className="col-sm-5">
                   <select
@@ -184,7 +223,7 @@ function UpdateSongModal(props) {
               </div>
               <br />
               <div className="row">
-                <div className="col-sm-9"></div>
+                <div className="col-sm-9">{inputsCheck}</div>
                 <div className="col-sm-3">
                   <button type="submit" className="btn btn-outline-dark">
                     Submit Edit

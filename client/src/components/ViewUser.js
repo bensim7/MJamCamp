@@ -43,7 +43,7 @@ const ViewUser = () => {
     setIsLoading(false);
   };
 
-  // Auto fetch Logged In User's detail when accessToken is populated with useContent
+  // Auto fetch Logged In User's detail when accessToken is populated with useContexat
   useEffect(() => {
     fetchViewUser();
   }, [accessToken]);
