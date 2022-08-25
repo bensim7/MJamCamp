@@ -11,6 +11,8 @@ import MatchUserRole from "./components/MatchUserRole";
 import MatchUserSongTitle from "./components/MatchUserSongTitle";
 import MatchUserSongLyrics from "./components/MatchUserSongLyrics";
 import MatchUserSongGenre from "./components/MatchUserSongGenre";
+import MessageForm from "./components/MessageForm";
+import ViewMessages from "./components/ViewMessages";
 import RequireLogin from "./components/RequireLogin";
 
 function App() {
@@ -174,6 +176,14 @@ function App() {
                 <ReactContext.Provider value={{ loginData }}>
                   <MatchUserRole /> <MatchUserSongGenre />
                   <MatchUserSongTitle /> <MatchUserSongLyrics />
+                </ReactContext.Provider>
+              }
+            />
+            <Route
+              path="/Chatarea"
+              element={
+                <ReactContext.Provider value={{ loginData }}>
+                  <ViewMessages />
                 </ReactContext.Provider>
               }
             />

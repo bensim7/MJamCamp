@@ -45,6 +45,14 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink
+              to="/Chatarea"
+              className={(navData) => (navData.isActive ? styles.active : "")}
+            >
+              Chat Area
+            </NavLink>
+          </li>
+          <li>
             <button
               className="btn btn-outline-light logOut"
               onClick={reactCtx.logOut}

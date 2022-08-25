@@ -48,10 +48,11 @@ html {
 body {
   margin: 0;
   background-color: var(--cobalt);
+  background-image: url("./image/piano_background.jpg");
   background-size: cover;
-  background-blend-mode: lighten;
+  background-blend-mode: multiply;
   color: white;
-  text-shadow: 1px 1px #000000;
+  /* text-shadow: 1px 1px #000000; */
 }
 
 .centered {
@@ -159,4 +160,13 @@ header {
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 5px;
+  background-color: var(--champagne);
+  color: black;
+}
+
+.messages {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid white;
+  overflow-y: scroll;
+  height: 500px;
 }

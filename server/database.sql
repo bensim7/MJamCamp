@@ -29,6 +29,13 @@ CREATE TABLE songs (
   updated_on TIMESTAMP WITH TIME ZONE
 );
 
+CREATE TABLE messages (
+  message_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  email VARCHAR(255) REFERENCES users(email),
+  username VARCHAR(50) NOT NULL,
+  message TEXT NOT NULL,
+  created_on TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp
+);
 
 
 

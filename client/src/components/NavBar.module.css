@@ -57,7 +57,7 @@
 @media only screen and (max-width: 770px) {
   header {
     display: flex;
-    height: 640px;
+    height: 720px;
     justify-content: center;
   }
 

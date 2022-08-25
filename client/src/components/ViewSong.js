@@ -28,7 +28,7 @@ const ViewSong = () => {
     const config = {
       method: "GET",
       headers: { authorization: "Bearer " + accessToken },
-      "Content-Type": "application/json",
+      // "Content-Type": "application/json",
     };
 
     try {
@@ -110,7 +110,7 @@ const ViewSong = () => {
             <div className="col-sm-7">{item.title}</div>
           </div>
           <div>
-            <div className="row">
+            <div className="row mt-3">
               <div className="col-sm-5">Lyrics: </div>
               <div className="col-sm-7">
                 {item.lyrics.map((lyric) => (
@@ -119,7 +119,7 @@ const ViewSong = () => {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-sm-5">Chords: </div>
             <div className="col-sm-7">{item.chords}</div>
           </div>

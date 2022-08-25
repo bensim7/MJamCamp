@@ -64,6 +64,7 @@ router.post(
       const payload = {
         id: userInDB.rows[0].user_id,
         email: userInDB.rows[0].email,
+        username: userInDB.rows[0].username,
         isAdmin: userInDB.rows[0].isadmin,
       };
 
@@ -324,5 +325,68 @@ router.post("/getuserbysongtitle", auth, async (req, res) => {
     res.status(400).json({ status: "error", message: "An error has occured" });
   }
 });
+
+///////////////////////////////////////////////////////////////////////////////////
+// Add User Matches into Matches Column (requires another table Work in progress)
+
+// router.post("/addmatches/:email", auth, async (req, res) => {
+//   try {
+//     const { email } = req.params;
+
+//     const userMatchDetails = await pool.query(
+//       "SELECT username, musictype, location, contact FROM users WHERE email = $1",
+//       [email]
+//     );
+
+//     console.log(userMatchDetails.rows);
+//     const loggedInUser = req.decoded.id;
+//     console.log(loggedInUser);
+//     const addUserToMatches = await pool.query(
+//       "UPDATE users SET matches = $1 WHERE user_id = $2",
+//       [userMatchDetails.rows, loggedInUser]
+//     );
+//     res.json(addUserToMatches.rows);
+//   } catch (error) {
+//     console.log("POST /addmatches", error);
+//     res.status(400).json({ status: "error", message: "An error has occured" });
+//   }
+// });
+
+// Delete user match from matches column
+// router.delete("/deletematches/:email", auth, async (req, res) => {
+//   try {
+//     const { email } = req.params;
+
+//     const loggedInUser = req.decoded.id;
+//     console.log(loggedInUser);
+//     const removeUserFromMatches = await pool.query(
+//       "UPDATE users SET matches = $1 WHERE user_id = $2",
+//       [{}, loggedInUser]
+//     );
+//     res.json(removeUserFromMatches);
+//   } catch (error) {
+//     console.log("POST /addmatches", error);
+//     res.status(400).json({ status: "error", message: "An error has occured" });
+//   }
+// });
+
+// Get user matches (object passed as string into matches array)
+// router.get("/getmatches", auth, async (req, res) => {
+//   try {
+//     const loggedInUser = req.decoded.id;
+//     console.log(loggedInUser);
+//     const getUserMatches = await pool.query(
+//       "SELECT matches FROM users WHERE user_id = $1",
+//       [loggedInUser]
+//     );
+//     console.log(getUserMatches.rows[0]);
+//     // const newJSON = getUserMatches.rows[0].matches.replace(/\"/g, "");
+//     const newJSON = JSON.parse(getUserMatches.rows[0].matches);
+//     res.json(newJSON);
+//   } catch (error) {
+//     console.log("POST /addmatches", error);
+//     res.status(400).json({ status: "error", message: "An error has occured" });
+//   }
+// });
 
 module.exports = router;

@@ -20,6 +20,8 @@ const usersController = require("./controller/users");
 app.use("/users", usersController);
 const songsController = require("./controller/songs");
 app.use("/songs", songsController);
+const messagesController = require("./controller/messages");
+app.use("/messages", messagesController);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server started on Port: ${PORT}`));
