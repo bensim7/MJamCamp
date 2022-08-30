@@ -26,20 +26,21 @@ const CreateSongForm = () => {
   }
   return (
     <>
-      <div className="centered">
+      <div className="left">
         <div className="container">
-          <span>
+          <span className="centered">
             <h2>Create/Add Song</h2> {content}
           </span>
 
           <form onSubmit={reactCtx.handleAddSongSubmit}>
             <div className="row mt-3">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
-                  <h5>*Enter Song Title</h5>
+                  <h5>Enter Song Title*</h5>
                 </label>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-6">
                 <input
                   name="title"
                   value={reactCtx.titleInput}
@@ -51,12 +52,13 @@ const CreateSongForm = () => {
             </div>
 
             <div className="row mt-3">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
                   <h5>Enter Lyrics</h5>
                 </label>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-6">
                 <textarea
                   rows="8"
                   cols="70"
@@ -76,12 +78,13 @@ const CreateSongForm = () => {
               </div>
             </div>
             <div className="row mt-3">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
                   <h5>Speech to Text</h5>
                 </label>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-3">
                 {reactCtx.isListening ? (
                   <span>Mic On </span>
                 ) : (
@@ -95,7 +98,7 @@ const CreateSongForm = () => {
                   Start/Stop
                 </button>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <button
                   className="btn btn-success"
                   type="button"
@@ -107,10 +110,11 @@ const CreateSongForm = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-5">
-                <h5>Display:</h5>
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
+                <h5>Display</h5>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-6">
                 <textarea
                   rows="8"
                   cols="70"
@@ -120,24 +124,26 @@ const CreateSongForm = () => {
               </div>
             </div>
             <div className="row mt-3">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
-                  <h5>*Saved Lyrics</h5>
+                  <h5>Saved Lyrics*</h5>
                 </label>
               </div>
-              <div className="col-md-5 boxContain">
+              <div className="col-md-6 boxContain">
                 {reactCtx.savedLyrics.map((lyric) => (
                   <p>{lyric}</p>
                 ))}
               </div>
             </div>
             <div className="row mt-3">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
                   <h5>Enter Chords</h5>
                 </label>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-6">
                 <textarea
                   rows="5"
                   cols="70"
@@ -150,12 +156,13 @@ const CreateSongForm = () => {
             </div>
 
             <div className="row mt-3">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
-                  <h5>*Select Genre</h5>
+                  <h5>Select Genre*</h5>
                 </label>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-6">
                 <select name="genre" onChange={reactCtx.handleGenreInput}>
                   <option value="">None Selected</option>
                   <option value="Classic Rock">Classic Rock</option>
@@ -172,8 +179,8 @@ const CreateSongForm = () => {
               </div>
             </div>
             <div className="row mt-3">
-              <div className="col-md-7"></div>
-              <div className="col-md-2">
+              <div className="col-md-6"></div>
+              <div className="col-md-3">
                 <h6>{reactCtx.inputsCheck}</h6>
               </div>
               <div className="col-md-3">

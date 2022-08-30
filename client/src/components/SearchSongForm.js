@@ -114,8 +114,9 @@ const SearchSongForm = () => {
         <div className="container searchSong">
           <form onSubmit={handleSearchedSongSubmit}>
             <div className="row">
-              <div className="col-md-4">
-                <label>Search Song:</label>
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
+                <label><h6>Search Song:</h6></label>
               </div>
               <div className="col-md-4">
                 <input

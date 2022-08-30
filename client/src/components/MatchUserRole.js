@@ -97,8 +97,9 @@ const MatchUserRole = () => {
       <div className="container matchSearch mt-5">
         <form onSubmit={handleUserMatchSubmit}>
           <div className="row">
-            <div className="col-sm-6">
-              <label>Search User By Role Entered:</label>
+            <div className="col-sm-2"></div>
+            <div className="col-sm-4">
+              <label><h6>Search User By Role Entered:</h6></label>
             </div>
             <div className="col-sm-2">
               <select name="musictype" onChange={handleMusicTypeInput}>

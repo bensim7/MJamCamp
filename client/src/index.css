@@ -121,7 +121,7 @@ header {
 .searchSong {
   width: 60%;
   margin: auto;
-  margin-top: 2em;
+  margin-top: 3em;
 }
 
 .accountDetails {
@@ -130,11 +130,16 @@ header {
 
 .matchSearch {
   width: 50%;
+  text-align: left;
 }
 
 /* .logOut {
   margin-left: 42%;
 } */
+
+.left {
+  text-align: left;
+}
 
 .headerAlign {
   display: flex;
@@ -157,6 +162,7 @@ header {
   box-shadow: 2px 10px 30px -1px rgba(0, 0, 0, 0.75);
   min-height: 20rem;
   /* margin-top: 20px; */
+  margin-left: 11px;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 5px;

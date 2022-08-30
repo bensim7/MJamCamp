@@ -98,8 +98,9 @@ const MatchUserSongGenre = () => {
       <div className="container matchSearch mt-5">
         <form onSubmit={handleUserMatchGenreSubmit}>
           <div className="row">
-            <div className="col-sm-6">
-              <label>Search User By Song Genre:</label>
+            <div className="col-sm-2"></div>
+            <div className="col-sm-4">
+              <label><h6>Search User By Song Genre:</h6></label>
             </div>
             <div className="col-sm-2">
               <select name="genre" onChange={handleGenreInput}>

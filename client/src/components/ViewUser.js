@@ -53,35 +53,35 @@ const ViewUser = () => {
 
   if (viewData) {
     content = (
-      <div className="container">
+      <div className="container left">
         <div className="row">
-          <div className="col-sm-2"></div>
+          <div className="col-sm-4"></div>
           <div className="col-sm-3">User Name:</div>
           <div className="col-sm-2">{viewData.username}</div>
         </div>
         <div className="row">
-          <div className="col-sm-2"></div>
+          <div className="col-sm-4"></div>
           <div className="col-sm-3">Instrument:</div>
           <div className="col-sm-2">{viewData.musictype}</div>
         </div>
         <div className="row">
-          <div className="col-sm-2"></div>
+          <div className="col-sm-4"></div>
           <div className="col-sm-3">Optional Contact Info:</div>
           <div className="col-sm-2"> {viewData.contact}</div>
         </div>
         <div className="row">
-          <div className="col-sm-2"></div>
+          <div className="col-sm-4"></div>
           <div className="col-sm-3">Optional Location:</div>
           <div className="col-sm-2"> {viewData.location}</div>
         </div>
 
         <div className="row">
-          <div className="col-sm-2"></div>
+          <div className="col-sm-4"></div>
           <div className="col-sm-3">Account Created On:</div>
           <div className="col-sm-2">{viewData.created_on}</div>
         </div>
         <div className="row">
-          <div className="col-sm-2"></div>
+          <div className="col-sm-4"></div>
           <div className="col-sm-3">Last Login On:</div>
           <div className="col-sm-2">{viewData.last_login}</div>
         </div>
@@ -103,8 +103,8 @@ const ViewUser = () => {
         {/* <button onClick={handleUserSubmit}>View User</button> */}
 
         <h5>User Account Details:</h5>
-        <div className="row">
-          <div className="col-sm-3"></div>
+        <div className="row left mb-3">
+          <div className="col-sm-4"></div>
           <div className="col-sm-4"></div>
           <div className="col-sm-2">
             <Button

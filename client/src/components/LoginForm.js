@@ -27,13 +27,14 @@ const LoginForm = () => {
   }
   return (
     <>
-      <div className="container mt-3">
+      <div className="container mt-3 left">
         <div className="centered">
           <h2>Login Form</h2>
         </div>
         <form onSubmit={reactCtx.handleLoginSubmit}>
           <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-1"></div>
+            <div className="col-md-3">
               <label>
                 <h5>Enter Email Address:</h5>
               </label>
@@ -52,7 +53,8 @@ const LoginForm = () => {
 
           <div>
             <div className="row">
-              <div className="col-md-5">
+              <div className="col-md-1"></div>
+              <div className="col-md-3">
                 <label>
                   <h5>Enter Password:</h5>
                 </label>
@@ -70,14 +72,15 @@ const LoginForm = () => {
             <p>{reactCtx.loginInvalid.password}</p>
           </div>
           <div className="row">
-            <div className="col-md-6">
+          <div className="col-md-1"></div>
+            <div className="col-md-3">
               {reactCtx.validFields ? (
                 <h6>All inputs are filled</h6>
               ) : (
-                <h6>Please fill both email and password:</h6>
+                <h6>Please fill both email and password</h6>
               )}
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <Button
                 variant="outline-warning"
                 onClick={() => setModalShow(true)}
